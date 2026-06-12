@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Production Ready Web App</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+}
+
+.header{
+    background:#2563eb;
+    color:white;
+    padding:15px 30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.sidebar{
+    position:fixed;
+    top:60px;
+    left:0;
+    width:220px;
+    height:100%;
+    background:#1e293b;
+    padding-top:20px;
+}
+
+.sidebar a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    padding:15px 20px;
+    transition:.3s;
+}
+
+.sidebar a:hover{
+    background:#334155;
+}
+
+.main{
+    margin-left:220px;
+    padding:25px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+
+.card h2{
+    color:#2563eb;
+    margin-bottom:10px;
+}
+
+.table-container{
+    background:white;
+    margin-top:25px;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,.1);
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    padding:12px;
+    border-bottom:1px solid #ddd;
+    text-align:left;
+}
+
+th{
+    background:#2563eb;
+    color:white;
+}
+
+.btn{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.btn:hover{
+    background:#1d4ed8;
+}
+
+@media(max-width:768px){
+
+.sidebar{
+    width:100%;
+    height:auto;
+    position:relative;
+    top:0;
+}
+
+.main{
+    margin-left:0;
+}
+
+.header{
+    flex-direction:column;
+    gap:10px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <h1>Production Web App</h1>
+    <button class="btn" onclick="showMessage()">Notifications</button>
+</div>
+
+<div class="sidebar">
+    <a href="#">Dashboard</a>
+    <a href="#">Users</a>
+    <a href="#">Reports</a>
+    <a href="#">Analytics</a>
+    <a href="#">Settings</a>
+</div>
+
+<div class="main">
+
+    <div class="cards">
+
+        <div class="card">
+            <h2>1,250</h2>
+            <p>Total Users</p>
+        </div>
+
+        <div class="card">
+            <h2>850</h2>
+            <p>Active Users</p>
+        </div>
+
+        <div class="card">
+            <h2>₹75,000</h2>
+            <p>Monthly Revenue</p>
+        </div>
+
+        <div class="card">
+            <h2>98%</h2>
+            <p>System Uptime</p>
+        </div>
+
+    </div>
+
+    <div class="table-container">
+        <h2 style="margin-bottom:15px;">Recent Users</h2>
+
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Status</th>
+            </tr>
+
+            <tr>
+                <td>001</td>
+                <td>John</td>
+                <td>Active</td>
+            </tr>
+
+            <tr>
+                <td>002</td>
+                <td>Emma</td>
+                <td>Active</td>
+            </tr>
+
+            <tr>
+                <td>003</td>
+                <td>David</td>
+                <td>Inactive</td>
+            </tr>
+
+            <tr>
+                <td>004</td>
+                <td>Sophia</td>
+                <td>Active</td>
+            </tr>
+
+        </table>
+    </div>
+
+</div>
+
+<script>
+function showMessage(){
+    alert("You have new notifications!");
+}
+</script>
+
+</body>
+</html>

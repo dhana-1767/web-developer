@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enterprise Production Website</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI, sans-serif;
+}
+
+body{
+    background:#f4f7fb;
+    color:#333;
+}
+
+header{
+    background:#0f172a;
+    color:white;
+    padding:20px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:bold;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin-left:20px;
+}
+
+.hero{
+    min-height:90vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+    color:white;
+    padding:40px;
+}
+
+.hero-content h1{
+    font-size:3rem;
+    margin-bottom:20px;
+}
+
+.hero-content p{
+    font-size:1.2rem;
+    margin-bottom:30px;
+}
+
+.btn{
+    display:inline-block;
+    padding:14px 30px;
+    background:white;
+    color:#2563eb;
+    text-decoration:none;
+    border-radius:6px;
+    font-weight:bold;
+}
+
+.features{
+    padding:80px 8%;
+}
+
+.features h2{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 5px 20px rgba(0,0,0,.1);
+}
+
+.contact{
+    background:#0f172a;
+    color:white;
+    padding:80px 8%;
+    text-align:center;
+}
+
+.contact input,
+.contact textarea{
+    width:100%;
+    max-width:600px;
+    padding:12px;
+    margin:10px auto;
+    display:block;
+    border:none;
+    border-radius:5px;
+}
+
+.contact button{
+    padding:12px 25px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+footer{
+    text-align:center;
+    padding:20px;
+    background:#020617;
+    color:#ccc;
+}
+
+@media(max-width:768px){
+.hero-content h1{
+    font-size:2rem;
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">EnterpriseApp</div>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Services</a>
+        <a href="#">Features</a>
+        <a href="#">Contact</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>Production Ready Business Platform</h1>
+        <p>Scalable, Secure and Cloud-Native Web Solutions</p>
+        <a href="#" class="btn">Get Started</a>
+    </div>
+</section>
+
+<section class="features">
+    <h2>Our Features</h2>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>Cloud Hosting</h3>
+            <p>AWS, Azure and multi-cloud deployment support.</p>
+        </div>
+
+        <div class="card">
+            <h3>Security</h3>
+            <p>JWT Authentication, SSL and role-based access.</p>
+        </div>
+
+        <div class="card">
+            <h3>Analytics</h3>
+            <p>Real-time dashboards and reporting systems.</p>
+        </div>
+
+        <div class="card">
+            <h3>Automation</h3>
+            <p>CI/CD pipelines and automated deployments.</p>
+        </div>
+
+    </div>
+</section>
+
+<section class="contact">
+    <h2>Contact Us</h2>
+
+    <form>
+        <input type="text" placeholder="Your Name">
+        <input type="email" placeholder="Your Email">
+        <textarea rows="5" placeholder="Your Message"></textarea>
+        <button type="submit">Send Message</button>
+    </form>
+</section>
+
+<footer>
+    © 2026 EnterpriseApp. All Rights Reserved.
+</footer>
+
+</body>
+</html>

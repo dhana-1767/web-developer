@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Technical Documentation</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+    color:#333;
+    line-height:1.6;
+}
+
+header{
+    background:#1e3a8a;
+    color:white;
+    padding:25px;
+    text-align:center;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+}
+
+.section{
+    background:white;
+    padding:20px;
+    margin-bottom:20px;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+h1,h2,h3{
+    margin-bottom:10px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:10px;
+}
+
+table th,
+table td{
+    border:1px solid #ddd;
+    padding:12px;
+    text-align:left;
+}
+
+table th{
+    background:#1e3a8a;
+    color:white;
+}
+
+pre{
+    background:#272822;
+    color:#f8f8f2;
+    padding:15px;
+    border-radius:6px;
+    overflow:auto;
+}
+
+code{
+    font-family:Consolas, monospace;
+}
+
+.footer{
+    text-align:center;
+    padding:20px;
+    color:#666;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Technical Documentation</h1>
+    <p>Production Ready Web Application Documentation</p>
+</header>
+
+<div class="container">
+
+    <div class="section">
+        <h2>1. Project Overview</h2>
+        <p>
+            This web application provides secure user management,
+            analytics dashboards, API integrations, and cloud deployment support.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>2. System Architecture</h2>
+        <pre>
+Frontend (HTML/CSS/JS)
+          |
+          ▼
+      REST API
+          |
+          ▼
+ Backend (Node.js/Flask)
+          |
+          ▼
+ Database (MySQL/PostgreSQL)
+        </pre>
+    </div>
+
+    <div class="section">
+        <h2>3. Technology Stack</h2>
+
+        <table>
+            <tr>
+                <th>Layer</th>
+                <th>Technology</th>
+            </tr>
+            <tr>
+                <td>Frontend</td>
+                <td>HTML5, CSS3, JavaScript</td>
+            </tr>
+            <tr>
+                <td>Backend</td>
+                <td>Node.js / Flask</td>
+            </tr>
+            <tr>
+                <td>Database</td>
+                <td>MySQL / PostgreSQL</td>
+            </tr>
+            <tr>
+                <td>Authentication</td>
+                <td>JWT</td>
+            </tr>
+            <tr>
+                <td>Deployment</td>
+                <td>Docker, AWS</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>4. Features</h2>
+        <ul>
+            <li>User Registration & Login</li>
+            <li>Role-Based Access Control</li>
+            <li>Dashboard Analytics</li>
+            <li>Report Generation</li>
+            <li>REST API Integration</li>
+            <li>Cloud Deployment</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>5. Installation Guide</h2>
+
+        <h3>Clone Repository</h3>
+
+        <pre><code>
+git clone https://github.com/company/project.git
+cd project
+        </code></pre>
+
+        <h3>Install Dependencies</h3>
+
+        <pre><code>
+npm install
+        </code></pre>
+
+        <h3>Start Server</h3>
+
+        <pre><code>
+npm start
+        </code></pre>
+    </div>
+
+    <div class="section">
+        <h2>6. API Example</h2>
+
+        <h3>Login Endpoint</h3>
+
+        <pre><code>
+POST /api/auth/login
+
+{
+   "email":"user@example.com",
+   "password":"password"
+}
+        </code></pre>
+
+        <h3>Response</h3>
+
+        <pre><code>
+{
+   "token":"jwt_token",
+   "user":{
+      "id":1,
+      "name":"John Doe"
+   }
+}
+        </code></pre>
+    </div>
+
+    <div class="section">
+        <h2>7. Database Schema</h2>
+
+        <pre><code>
+CREATE TABLE users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100),
+    email VARCHAR(100) UNIQUE,
+    password VARCHAR(255),
+    role VARCHAR(50),
+    created_at TIMESTAMP
+);
+        </code></pre>
+    </div>
+
+    <div class="section">
+        <h2>8. Security Guidelines</h2>
+        <ul>
+            <li>HTTPS Encryption</li>
+            <li>JWT Authentication</li>
+            <li>Password Hashing (bcrypt)</li>
+            <li>API Rate Limiting</li>
+            <li>Environment Variables</li>
+            <li>Regular Security Audits</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>9. Deployment</h2>
+
+        <pre><code>
+docker build -t webapp .
+docker run -p 5000:5000 webapp
+        </code></pre>
+    </div>
+
+    <div class="section">
+        <h2>10. Version History</h2>
+
+        <table>
+            <tr>
+                <th>Version</th>
+                <th>Date</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>1.0.0</td>
+                <td>12-Jun-2026</td>
+                <td>Initial Release</td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+<div class="footer">
+    © 2026 Technical Documentation | Production Ready Web Application
+</div>
+
+</body>
+</html>

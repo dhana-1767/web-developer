@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Industrial Solutions</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f5f5f5;
+    color:#333;
+}
+
+header{
+    background:#1f2937;
+    color:white;
+    padding:20px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:bold;
+}
+
+nav ul{
+    list-style:none;
+    display:flex;
+    gap:25px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+}
+
+.hero{
+    background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
+    url('https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=1400&q=80');
+    background-size:cover;
+    background-position:center;
+    height:85vh;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+}
+
+.hero-content h1{
+    font-size:55px;
+    margin-bottom:20px;
+}
+
+.hero-content p{
+    font-size:20px;
+    margin-bottom:25px;
+}
+
+.btn{
+    background:#f59e0b;
+    color:white;
+    padding:14px 28px;
+    border:none;
+    border-radius:5px;
+    text-decoration:none;
+    display:inline-block;
+}
+
+section{
+    padding:70px 8%;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.services{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,.1);
+    text-align:center;
+}
+
+.card h3{
+    margin:15px 0;
+}
+
+.stats{
+    background:#1f2937;
+    color:white;
+}
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+    text-align:center;
+}
+
+.stat-number{
+    font-size:42px;
+    font-weight:bold;
+    color:#f59e0b;
+}
+
+.projects{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:25px;
+}
+
+.project{
+    background:white;
+    overflow:hidden;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,.1);
+}
+
+.project img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+.project-content{
+    padding:20px;
+}
+
+.contact{
+    background:#e5e7eb;
+}
+
+.contact-form{
+    max-width:600px;
+    margin:auto;
+}
+
+.contact-form input,
+.contact-form textarea{
+    width:100%;
+    padding:12px;
+    margin-bottom:15px;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+.contact-form button{
+    background:#1f2937;
+    color:white;
+    border:none;
+    padding:12px 25px;
+    cursor:pointer;
+}
+
+footer{
+    background:#111827;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+@media(max-width:768px){
+    .hero-content h1{
+        font-size:38px;
+    }
+
+    nav ul{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="logo">🏭 IndustrialPro</div>
+
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Projects</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>Engineering Excellence & Industrial Innovation</h1>
+        <p>Providing world-class manufacturing and industrial solutions.</p>
+        <a href="#" class="btn">Explore Services</a>
+    </div>
+</section>
+
+<section>
+    <div class="section-title">
+        <h2>Our Services</h2>
+    </div>
+
+    <div class="services">
+        <div class="card">
+            <h3>⚙ Manufacturing</h3>
+            <p>Advanced production systems and automation.</p>
+        </div>
+
+        <div class="card">
+            <h3>🔧 Maintenance</h3>
+            <p>Industrial equipment maintenance solutions.</p>
+        </div>
+
+        <div class="card">
+            <h3>🏗 Construction</h3>
+            <p>Large-scale infrastructure and engineering projects.</p>
+        </div>
+
+        <div class="card">
+            <h3>🤖 Automation</h3>
+            <p>Smart factory and Industry 4.0 implementations.</p>
+        </div>
+    </div>
+</section>
+
+<section class="stats">
+    <div class="stats-grid">
+
+        <div>
+            <div class="stat-number">500+</div>
+            <p>Projects Completed</p>
+        </div>
+
+        <div>
+            <div class="stat-number">150+</div>
+            <p>Engineers</p>
+        </div>
+
+        <div>
+            <div class="stat-number">25+</div>
+            <p>Years Experience</p>
+        </div>
+
+        <div>
+            <div class="stat-number">50+</div>
+            <p>Countries Served</p>
+        </div>
+
+    </div>
+</section>
+
+<section>
+    <div class="section-title">
+        <h2>Featured Projects</h2>
+    </div>
+
+    <div class="projects">
+
+        <div class="project">
+            <img src="https://picsum.photos/600/400?1" alt="">
+            <div class="project-content">
+                <h3>Smart Manufacturing Plant</h3>
+                <p>AI-powered production facility.</p>
+            </div>
+        </div>
+
+        <div class="project">
+            <img src="https://picsum.photos/600/400?2" alt="">
+            <div class="project-content">
+                <h3>Industrial Automation</h3>
+                <p>Robotics and automated workflows.</p>
+            </div>
+        </div>
+
+        <div class="project">
+            <img src="https://picsum.photos/600/400?3" alt="">
+            <div class="project-content">
+                <h3>Energy Infrastructure</h3>
+                <p>Large-scale renewable energy project.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="contact">
+    <div class="section-title">
+        <h2>Contact Us</h2>
+    </div>
+
+    <form class="contact-form">
+        <input type="text" placeholder="Your Name">
+        <input type="email" placeholder="Email Address">
+        <textarea rows="5" placeholder="Project Details"></textarea>
+        <button type="submit">Send Inquiry</button>
+    </form>
+</section>
+
+<footer>
+    <p>© 2026 IndustrialPro Engineering Solutions. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>
