@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Automation Script Dashboard</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f5f7fb;
+}
+
+.header{
+    background:#2563eb;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+.container{
+    max-width:1200px;
+    margin:30px auto;
+    padding:20px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+.card h3{
+    margin-bottom:10px;
+}
+
+button{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+
+.logs{
+    margin-top:30px;
+    background:#111827;
+    color:#22c55e;
+    padding:20px;
+    border-radius:10px;
+    min-height:250px;
+    overflow:auto;
+    font-family:monospace;
+}
+
+.status{
+    color:green;
+    font-weight:bold;
+}
+
+.footer{
+    text-align:center;
+    padding:20px;
+    color:#666;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+    <h1>🤖 Automation Scripts Dashboard</h1>
+    <p>Manage and Execute Automated Tasks</p>
+</div>
+
+<div class="container">
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>📁 Backup Files</h3>
+            <p>Create automated backups.</p>
+            <button onclick="runTask('File Backup')">
+                Run Script
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>📧 Email Reports</h3>
+            <p>Send scheduled reports.</p>
+            <button onclick="runTask('Email Reports')">
+                Run Script
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>☁️ Data Sync</h3>
+            <p>Synchronize cloud databases.</p>
+            <button onclick="runTask('Data Sync')">
+                Run Script
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>🗄️ Database Cleanup</h3>
+            <p>Remove old records automatically.</p>
+            <button onclick="runTask('Database Cleanup')">
+                Run Script
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>📊 Analytics Export</h3>
+            <p>Generate reports and exports.</p>
+            <button onclick="runTask('Analytics Export')">
+                Run Script
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>🔄 API Integration</h3>
+            <p>Automate API workflows.</p>
+            <button onclick="runTask('API Integration')">
+                Run Script
+            </button>
+        </div>
+
+    </div>
+
+    <div class="logs" id="logs">
+System Ready...
+    </div>
+
+</div>
+
+<div class="footer">
+    © 2026 Automation Script Manager
+</div>
+
+<script>
+
+function runTask(taskName){
+
+    const logs =
+        document.getElementById("logs");
+
+    const time =
+        new Date().toLocaleTimeString();
+
+    logs.innerHTML += `
+[${time}] ${taskName} started...
+`;
+
+    setTimeout(() => {
+
+        logs.innerHTML += `
+[${time}] ${taskName} completed successfully ✅
+`;
+
+        logs.scrollTop = logs.scrollHeight;
+
+    }, 1500);
+}
+
+</script>
+
+</body>
+</html>

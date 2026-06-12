@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Powered Dashboard</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+}
+
+.container{
+    display:flex;
+    min-height:100vh;
+}
+
+.sidebar{
+    width:250px;
+    background:#1e293b;
+    color:#fff;
+    padding:20px;
+}
+
+.sidebar h2{
+    margin-bottom:30px;
+}
+
+.sidebar ul{
+    list-style:none;
+}
+
+.sidebar ul li{
+    padding:15px 0;
+    cursor:pointer;
+}
+
+.main{
+    flex:1;
+    padding:20px;
+}
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:#fff;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+.card h3{
+    color:#666;
+}
+
+.card p{
+    font-size:28px;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+.chart-section{
+    margin-top:30px;
+    background:#fff;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+.ai-panel{
+    margin-top:30px;
+    background:#fff;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+.ai-insight{
+    background:#eef6ff;
+    border-left:5px solid #007bff;
+    padding:15px;
+    margin-top:15px;
+}
+
+button{
+    background:#007bff;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#0056b3;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="sidebar">
+        <h2>🤖 AI Dashboard</h2>
+        <ul>
+            <li>Dashboard</li>
+            <li>Analytics</li>
+            <li>Users</li>
+            <li>Reports</li>
+            <li>AI Insights</li>
+            <li>Settings</li>
+        </ul>
+    </div>
+
+    <div class="main">
+
+        <div class="header">
+            <h1>AI Analytics Dashboard</h1>
+            <button onclick="generateInsight()">
+                Generate AI Insight
+            </button>
+        </div>
+
+        <div class="cards">
+            <div class="card">
+                <h3>Total Revenue</h3>
+                <p>$48,250</p>
+            </div>
+
+            <div class="card">
+                <h3>Active Users</h3>
+                <p>12,340</p>
+            </div>
+
+            <div class="card">
+                <h3>Conversion Rate</h3>
+                <p>8.5%</p>
+            </div>
+
+            <div class="card">
+                <h3>AI Score</h3>
+                <p>94%</p>
+            </div>
+        </div>
+
+        <div class="chart-section">
+            <h2>Revenue Analytics</h2>
+            <canvas id="myChart"></canvas>
+        </div>
+
+        <div class="ai-panel">
+            <h2>🤖 AI Insights</h2>
+
+            <div id="insights">
+                <div class="ai-insight">
+                    AI detected a 12% increase in user engagement this week.
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const ctx = document.getElementById('myChart');
+
+new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ['Jan','Feb','Mar','Apr','May','Jun'],
+        datasets: [{
+            label: 'Revenue',
+            data: [12000,18000,15000,25000,32000,48250],
+            borderColor: '#007bff',
+            fill:false,
+            tension:0.4
+        }]
+    }
+});
+
+function generateInsight(){
+
+    const insights = [
+        "Sales are predicted to grow by 15% next month.",
+        "AI detected unusual traffic patterns in the last 24 hours.",
+        "Customer retention improved by 8% this quarter.",
+        "Peak user activity occurs between 6 PM and 9 PM.",
+        "Marketing campaigns generated 22% more conversions."
+    ];
+
+    const randomInsight =
+        insights[Math.floor(Math.random()*insights.length)];
+
+    document.getElementById("insights").innerHTML +=
+    `<div class="ai-insight">${randomInsight}</div>`;
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recommendation Engine</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f4f4;
+    padding:30px;
+}
+
+.container{
+    max-width:800px;
+    margin:auto;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+h2{
+    text-align:center;
+}
+
+select{
+    width:100%;
+    padding:10px;
+    margin:15px 0;
+}
+
+.recommendations{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:15px;
+}
+
+.card{
+    background:#fafafa;
+    border:1px solid #ddd;
+    padding:15px;
+    border-radius:8px;
+}
+
+.card h4{
+    margin-bottom:10px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>AI Recommendation Engine</h2>
+
+    <label>Select Category:</label>
+    <select id="category" onchange="getRecommendations()">
+        <option value="">Choose Category</option>
+        <option value="electronics">Electronics</option>
+        <option value="books">Books</option>
+        <option value="fashion">Fashion</option>
+    </select>
+
+    <div class="recommendations" id="results"></div>
+</div>
+
+<script>
+
+const products = {
+    electronics: [
+        "Laptop",
+        "Smartphone",
+        "Wireless Earbuds",
+        "Smart Watch"
+    ],
+    books: [
+        "Data Structures",
+        "Java Programming",
+        "Machine Learning",
+        "Web Development"
+    ],
+    fashion: [
+        "T-Shirt",
+        "Jeans",
+        "Sneakers",
+        "Jacket"
+    ]
+};
+
+function getRecommendations() {
+
+    const category =
+        document.getElementById("category").value;
+
+    const results =
+        document.getElementById("results");
+
+    results.innerHTML = "";
+
+    if(!category) return;
+
+    products[category].forEach(item => {
+
+        results.innerHTML += `
+            <div class="card">
+                <h4>${item}</h4>
+                <p>Recommended for you</p>
+            </div>
+        `;
+    });
+}
+
+</script>
+
+</body>
+</html>

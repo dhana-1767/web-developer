@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Attendance Management System</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background:#f4f4f4;
+            padding:20px;
+        }
+
+        .container{
+            max-width:700px;
+            margin:auto;
+            background:#fff;
+            padding:20px;
+            border-radius:10px;
+            box-shadow:0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2{
+            text-align:center;
+            color:#333;
+        }
+
+        input, select, button{
+            padding:10px;
+            margin:5px;
+            width:100%;
+            box-sizing:border-box;
+        }
+
+        button{
+            background:#007bff;
+            color:white;
+            border:none;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:#0056b3;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            margin-top:20px;
+        }
+
+        table, th, td{
+            border:1px solid #ddd;
+        }
+
+        th{
+            background:#007bff;
+            color:white;
+        }
+
+        th, td{
+            padding:10px;
+            text-align:center;
+        }
+
+        .present{
+            color:green;
+            font-weight:bold;
+        }
+
+        .absent{
+            color:red;
+            font-weight:bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Attendance Management System</h2>
+
+    <input type="text" id="studentName" placeholder="Enter Student Name">
+
+    <select id="attendanceStatus">
+        <option value="Present">Present</option>
+        <option value="Absent">Absent</option>
+    </select>
+
+    <button onclick="markAttendance()">Mark Attendance</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Status</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody id="attendanceTable">
+        </tbody>
+    </table>
+</div>
+
+<script>
+function markAttendance() {
+    let name = document.getElementById("studentName").value;
+    let status = document.getElementById("attendanceStatus").value;
+
+    if(name === ""){
+        alert("Please enter student name");
+        return;
+    }
+
+    let table = document.getElementById("attendanceTable");
+    let row = table.insertRow();
+
+    let nameCell = row.insertCell(0);
+    let statusCell = row.insertCell(1);
+    let dateCell = row.insertCell(2);
+
+    nameCell.innerHTML = name;
+    statusCell.innerHTML = status;
+    statusCell.className =
+        status === "Present" ? "present" : "absent";
+
+    dateCell.innerHTML = new Date().toLocaleDateString();
+
+    document.getElementById("studentName").value = "";
+}
+</script>
+
+</body>
+</html>

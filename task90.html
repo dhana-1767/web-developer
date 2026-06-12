@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reusable Backend Modules</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            background:#f4f6f9;
+            padding:30px;
+        }
+
+        .container{
+            max-width:1000px;
+            margin:auto;
+        }
+
+        h1{
+            text-align:center;
+            color:#333;
+            margin-bottom:20px;
+        }
+
+        .card{
+            background:#fff;
+            padding:20px;
+            border-radius:10px;
+            margin-bottom:20px;
+            box-shadow:0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        h2{
+            color:#007bff;
+            margin-bottom:10px;
+        }
+
+        pre{
+            background:#272822;
+            color:#fff;
+            padding:15px;
+            border-radius:8px;
+            overflow:auto;
+        }
+
+        ul{
+            padding-left:20px;
+        }
+
+        li{
+            margin:8px 0;
+        }
+
+        .architecture{
+            background:#eef5ff;
+            border-left:5px solid #007bff;
+            padding:15px;
+            margin-top:10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Reusable Backend Modules Architecture</h1>
+
+    <div class="card">
+        <h2>Project Structure</h2>
+
+        <div class="architecture">
+<pre>
+backend/
+│
+├── modules/
+│   ├── auth/
+│   ├── users/
+│   ├── products/
+│   └── orders/
+│
+├── middleware/
+│   ├── authMiddleware.js
+│   └── errorHandler.js
+│
+├── utils/
+│   ├── logger.js
+│   └── response.js
+│
+├── config/
+│   └── database.js
+│
+├── app.js
+└── server.js
+</pre>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Reusable Components</h2>
+        <ul>
+            <li>Authentication Module</li>
+            <li>User Management Module</li>
+            <li>Product Management Module</li>
+            <li>Order Processing Module</li>
+            <li>Error Handling Middleware</li>
+            <li>Response Utility Functions</li>
+            <li>Logging Service</li>
+            <li>Database Configuration</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>Benefits</h2>
+        <ul>
+            <li>Code Reusability</li>
+            <li>Easy Maintenance</li>
+            <li>Scalable Architecture</li>
+            <li>Faster Development</li>
+            <li>Better Testing Support</li>
+            <li>Clean Project Structure</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>Sample API Endpoint</h2>
+
+<pre>
+GET    /api/users
+POST   /api/users
+PUT    /api/users/:id
+DELETE /api/users/:id
+</pre>
+
+    </div>
+
+</div>
+
+</body>
+</html>

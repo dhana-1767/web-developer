@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LMS Platform</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+}
+
+header{
+    background:#2563eb;
+    color:white;
+    padding:15px;
+    text-align:center;
+}
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:20px auto;
+}
+
+.course-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:20px;
+}
+
+.course-card{
+    background:white;
+    border-radius:10px;
+    padding:20px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+.course-card h3{
+    color:#2563eb;
+    margin-bottom:10px;
+}
+
+.progress-bar{
+    width:100%;
+    height:20px;
+    background:#ddd;
+    border-radius:10px;
+    overflow:hidden;
+    margin:10px 0;
+}
+
+.progress{
+    height:100%;
+    background:#22c55e;
+    width:0%;
+}
+
+button{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+
+.video-section{
+    margin-top:30px;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+}
+
+iframe{
+    width:100%;
+    height:400px;
+    border:none;
+}
+
+.quiz{
+    margin-top:20px;
+}
+
+.quiz button{
+    margin-top:10px;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Learning Management System</h1>
+</header>
+
+<div class="container">
+
+    <h2>Available Courses</h2>
+
+    <div class="course-grid">
+
+        <div class="course-card">
+            <h3>HTML & CSS</h3>
+            <p>Frontend Development Basics</p>
+
+            <div class="progress-bar">
+                <div class="progress" id="p1"></div>
+            </div>
+
+            <button onclick="enroll('p1')">
+                Enroll Course
+            </button>
+        </div>
+
+        <div class="course-card">
+            <h3>JavaScript</h3>
+            <p>Interactive Web Development</p>
+
+            <div class="progress-bar">
+                <div class="progress" id="p2"></div>
+            </div>
+
+            <button onclick="enroll('p2')">
+                Enroll Course
+            </button>
+        </div>
+
+        <div class="course-card">
+            <h3>Python Programming</h3>
+            <p>Backend Development</p>
+
+            <div class="progress-bar">
+                <div class="progress" id="p3"></div>
+            </div>
+
+            <button onclick="enroll('p3')">
+                Enroll Course
+            </button>
+        </div>
+
+    </div>
+
+    <div class="video-section">
+        <h2>Course Lesson</h2>
+
+        <iframe
+        src="https://www.youtube.com/embed/qz0aGYrrlhU">
+        </iframe>
+
+        <div class="quiz">
+            <h3>Quick Quiz</h3>
+
+            <p>
+                Which HTML tag creates a hyperlink?
+            </p>
+
+            <input type="radio" name="q1"> &lt;img&gt;<br>
+            <input type="radio" name="q1" id="correct">
+            &lt;a&gt;<br>
+            <input type="radio" name="q1">
+            &lt;table&gt;<br>
+
+            <button onclick="checkQuiz()">
+                Submit Quiz
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+
+function enroll(id){
+
+    let progress =
+    document.getElementById(id);
+
+    progress.style.width="100%";
+
+    alert("Successfully Enrolled!");
+}
+
+function checkQuiz(){
+
+    if(document.getElementById("correct").checked){
+        alert("Correct Answer!");
+    }else{
+        alert("Wrong Answer!");
+    }
+}
+</script>
+
+</body>
+</html>

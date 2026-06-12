@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CI/CD Pipeline Dashboard</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f7fc;
+}
+
+header{
+    background:#24292e;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:30px auto;
+}
+
+.pipeline{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.stage{
+    background:white;
+    border-radius:12px;
+    padding:20px;
+    text-align:center;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    transition:.3s;
+}
+
+.stage:hover{
+    transform:translateY(-5px);
+}
+
+.icon{
+    font-size:40px;
+    margin-bottom:10px;
+}
+
+.success{
+    color:#28a745;
+    font-weight:bold;
+}
+
+.running{
+    color:#ff9800;
+    font-weight:bold;
+}
+
+.code{
+    background:#1e1e1e;
+    color:#00ff88;
+    padding:10px;
+    border-radius:8px;
+    margin-top:10px;
+    text-align:left;
+    overflow-x:auto;
+    font-size:14px;
+}
+
+.btn{
+    display:inline-block;
+    margin-top:30px;
+    padding:12px 25px;
+    background:#0366d6;
+    color:white;
+    text-decoration:none;
+    border-radius:6px;
+}
+
+.logs{
+    margin-top:30px;
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+.logs h2{
+    margin-bottom:15px;
+}
+
+.log-box{
+    background:#111;
+    color:#00ff88;
+    padding:15px;
+    border-radius:8px;
+    height:200px;
+    overflow-y:auto;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>🚀 CI/CD Pipeline Dashboard</h1>
+    <p>Continuous Integration & Continuous Deployment Monitoring</p>
+</header>
+
+<div class="container">
+
+    <div class="pipeline">
+
+        <div class="stage">
+            <div class="icon">📦</div>
+            <h3>Build</h3>
+            <p class="success">Completed</p>
+            <div class="code">
+npm install<br>
+npm run build
+            </div>
+        </div>
+
+        <div class="stage">
+            <div class="icon">🧪</div>
+            <h3>Test</h3>
+            <p class="success">Passed</p>
+            <div class="code">
+npm test<br>
+Coverage: 98%
+            </div>
+        </div>
+
+        <div class="stage">
+            <div class="icon">🔒</div>
+            <h3>Security Scan</h3>
+            <p class="success">Passed</p>
+            <div class="code">
+Dependency Check<br>
+No Vulnerabilities
+            </div>
+        </div>
+
+        <div class="stage">
+            <div class="icon">☁️</div>
+            <h3>Deploy</h3>
+            <p class="running">In Progress</p>
+            <div class="code">
+Docker Build<br>
+Kubernetes Deploy
+            </div>
+        </div>
+
+    </div>
+
+    <center>
+        <a href="#" class="btn">Run Pipeline</a>
+    </center>
+
+    <div class="logs">
+        <h2>Pipeline Logs</h2>
+        <div class="log-box">
+[INFO] Build Started...<br>
+[SUCCESS] Dependencies Installed<br>
+[SUCCESS] Tests Passed<br>
+[SUCCESS] Security Scan Completed<br>
+[INFO] Deploying to Production...<br>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Analytics Dashboard</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+    display:flex;
+}
+
+.sidebar{
+    width:250px;
+    min-height:100vh;
+    background:#1f2937;
+    color:white;
+    padding:20px;
+}
+
+.sidebar h2{
+    margin-bottom:30px;
+}
+
+.sidebar ul{
+    list-style:none;
+}
+
+.sidebar li{
+    padding:12px;
+    margin:8px 0;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.sidebar li:hover{
+    background:#374151;
+}
+
+.main{
+    flex:1;
+    padding:25px;
+}
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+    margin-bottom:25px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+.card h3{
+    color:#666;
+    margin-bottom:10px;
+}
+
+.card .value{
+    font-size:30px;
+    font-weight:bold;
+    color:#2563eb;
+}
+
+.charts{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:20px;
+}
+
+.chart-box{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+.chart-placeholder{
+    height:300px;
+    background:linear-gradient(135deg,#dbeafe,#eff6ff);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:10px;
+    font-size:20px;
+    color:#2563eb;
+}
+
+.activity{
+    margin-top:25px;
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    padding:12px;
+    text-align:left;
+    border-bottom:1px solid #ddd;
+}
+
+th{
+    background:#f3f4f6;
+}
+
+.status{
+    color:green;
+    font-weight:bold;
+}
+
+@media(max-width:900px){
+    body{
+        flex-direction:column;
+    }
+
+    .sidebar{
+        width:100%;
+        min-height:auto;
+    }
+
+    .charts{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+    <h2>📊 Admin Panel</h2>
+
+    <ul>
+        <li>Dashboard</li>
+        <li>Users</li>
+        <li>Reports</li>
+        <li>Analytics</li>
+        <li>Orders</li>
+        <li>Settings</li>
+    </ul>
+</div>
+
+<div class="main">
+
+    <div class="header">
+        <h1>Analytics Overview</h1>
+        <h3 id="date"></h3>
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Total Users</h3>
+            <div class="value" id="users">12,540</div>
+        </div>
+
+        <div class="card">
+            <h3>Revenue</h3>
+            <div class="value">₹8.5L</div>
+        </div>
+
+        <div class="card">
+            <h3>Orders</h3>
+            <div class="value">4,231</div>
+        </div>
+
+        <div class="card">
+            <h3>Conversion Rate</h3>
+            <div class="value">6.2%</div>
+        </div>
+
+    </div>
+
+    <div class="charts">
+
+        <div class="chart-box">
+            <h3>Sales Analytics</h3>
+            <div class="chart-placeholder">
+                📈 Sales Chart Area
+            </div>
+        </div>
+
+        <div class="chart-box">
+            <h3>Traffic Sources</h3>
+            <div class="chart-placeholder">
+                🥧 Pie Chart Area
+            </div>
+        </div>
+
+    </div>
+
+    <div class="activity">
+
+        <h3>Recent Activity</h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Action</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>John</td>
+                    <td>Created Report</td>
+                    <td class="status">Success</td>
+                </tr>
+
+                <tr>
+                    <td>Sarah</td>
+                    <td>Updated Profile</td>
+                    <td class="status">Success</td>
+                </tr>
+
+                <tr>
+                    <td>David</td>
+                    <td>Generated Analytics</td>
+                    <td class="status">Success</td>
+                </tr>
+
+                <tr>
+                    <td>Emma</td>
+                    <td>Exported Data</td>
+                    <td class="status">Success</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+
+<script>
+document.getElementById("date").innerText =
+new Date().toLocaleDateString();
+</script>
+
+</body>
+</html>

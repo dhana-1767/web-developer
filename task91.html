@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Secure API Endpoints</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f4f7fc;
+    color:#333;
+}
+
+header{
+    background:#0d6efd;
+    color:white;
+    text-align:center;
+    padding:30px;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    margin:20px 0;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+h2{
+    color:#0d6efd;
+    margin-bottom:15px;
+}
+
+.endpoint{
+    background:#eef4ff;
+    padding:15px;
+    border-left:5px solid #0d6efd;
+    margin-bottom:15px;
+    border-radius:5px;
+}
+
+.method{
+    display:inline-block;
+    padding:5px 10px;
+    color:white;
+    border-radius:5px;
+    margin-right:10px;
+    font-weight:bold;
+}
+
+.post{
+    background:#28a745;
+}
+
+.get{
+    background:#17a2b8;
+}
+
+.code{
+    background:#1e1e1e;
+    color:#00ff88;
+    padding:15px;
+    border-radius:8px;
+    overflow-x:auto;
+    margin-top:10px;
+}
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.feature-box{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    text-align:center;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+footer{
+    text-align:center;
+    background:#0d6efd;
+    color:white;
+    padding:15px;
+    margin-top:30px;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>🔐 Secure API Endpoints</h1>
+    <p>Authentication, Authorization & Security Best Practices</p>
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h2>API Endpoints</h2>
+
+        <div class="endpoint">
+            <span class="method post">POST</span>
+            <strong>/api/register</strong>
+            <p>Create a new user account.</p>
+
+            <div class="code">
+{
+  "username":"john",
+  "password":"SecurePass123"
+}
+            </div>
+        </div>
+
+        <div class="endpoint">
+            <span class="method post">POST</span>
+            <strong>/api/login</strong>
+            <p>Authenticate user and return JWT token.</p>
+
+            <div class="code">
+{
+  "username":"john",
+  "password":"SecurePass123"
+}
+            </div>
+        </div>
+
+        <div class="endpoint">
+            <span class="method get">GET</span>
+            <strong>/api/profile</strong>
+            <p>Protected endpoint requiring JWT token.</p>
+
+            <div class="code">
+Authorization: Bearer JWT_TOKEN
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Security Features</h2>
+
+        <div class="features">
+
+            <div class="feature-box">
+                <h3>🔑 JWT Authentication</h3>
+                <p>Token-based authentication system.</p>
+            </div>
+
+            <div class="feature-box">
+                <h3>🔒 Password Hashing</h3>
+                <p>Passwords secured with bcrypt.</p>
+            </div>
+
+            <div class="feature-box">
+                <h3>🛡️ Rate Limiting</h3>
+                <p>Protects APIs from abuse.</p>
+            </div>
+
+            <div class="feature-box">
+                <h3>✅ Input Validation</h3>
+                <p>Prevents malicious requests.</p>
+            </div>
+
+            <div class="feature-box">
+                <h3>🌐 HTTPS Security</h3>
+                <p>Encrypted communication.</p>
+            </div>
+
+            <div class="feature-box">
+                <h3>🚀 Secure Headers</h3>
+                <p>Protection against common attacks.</p>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <p>© 2026 Secure API Documentation Portal</p>
+</footer>
+
+</body>
+</html>

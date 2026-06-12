@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Healthcare Management System</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f7fb;
+}
+
+header{
+    background:#0f766e;
+    color:#fff;
+    text-align:center;
+    padding:20px;
+}
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:20px auto;
+}
+
+.card{
+    background:#fff;
+    padding:20px;
+    border-radius:10px;
+    margin-bottom:20px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+h2{
+    margin-bottom:15px;
+    color:#0f766e;
+}
+
+input, select{
+    width:100%;
+    padding:10px;
+    margin:8px 0;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+button{
+    background:#0f766e;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#115e59;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+table th,
+table td{
+    border:1px solid #ddd;
+    padding:10px;
+}
+
+table th{
+    background:#0f766e;
+    color:white;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Healthcare Management System</h1>
+</header>
+
+<div class="container">
+
+<div class="card">
+    <h2>Patient Registration</h2>
+
+    <input type="text" id="patientName" placeholder="Patient Name">
+    <input type="number" id="patientAge" placeholder="Age">
+
+    <select id="gender">
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+    </select>
+
+    <button onclick="addPatient()">
+        Register Patient
+    </button>
+</div>
+
+<div class="card">
+    <h2>Appointment Booking</h2>
+
+    <input type="text" id="doctorName" placeholder="Doctor Name">
+    <input type="date" id="appointmentDate">
+
+    <button onclick="bookAppointment()">
+        Book Appointment
+    </button>
+</div>
+
+<div class="card">
+    <h2>Patient Records</h2>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+        </tr>
+        </thead>
+
+        <tbody id="patientTable"></tbody>
+    </table>
+</div>
+
+</div>
+
+<script>
+
+function addPatient(){
+
+    let name =
+    document.getElementById("patientName").value;
+
+    let age =
+    document.getElementById("patientAge").value;
+
+    let gender =
+    document.getElementById("gender").value;
+
+    if(name==="" || age===""){
+        alert("Please enter patient details");
+        return;
+    }
+
+    let table =
+    document.getElementById("patientTable");
+
+    let row = table.insertRow();
+
+    row.insertCell(0).innerHTML = name;
+    row.insertCell(1).innerHTML = age;
+    row.insertCell(2).innerHTML = gender;
+
+    document.getElementById("patientName").value="";
+    document.getElementById("patientAge").value="";
+}
+
+function bookAppointment(){
+
+    let doctor =
+    document.getElementById("doctorName").value;
+
+    let date =
+    document.getElementById("appointmentDate").value;
+
+    if(doctor==="" || date===""){
+        alert("Enter appointment details");
+        return;
+    }
+
+    alert(
+      "Appointment booked with Dr. " +
+      doctor + " on " + date
+    );
+}
+
+</script>
+
+</body>
+</html>

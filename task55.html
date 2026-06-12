@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Report Generation System</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+    padding:30px;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+    background:#fff;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+h1{
+    text-align:center;
+    margin-bottom:20px;
+    color:#333;
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+label{
+    display:block;
+    margin-bottom:5px;
+    font-weight:bold;
+}
+
+input, textarea{
+    width:100%;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+textarea{
+    height:120px;
+}
+
+button{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+
+.report{
+    margin-top:30px;
+    padding:20px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    background:#fafafa;
+    display:none;
+}
+
+.report h2{
+    margin-bottom:10px;
+    color:#2563eb;
+}
+
+.report-section{
+    margin-bottom:15px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Report Generation System</h1>
+
+    <div class="form-group">
+        <label>Report Title</label>
+        <input type="text" id="title">
+    </div>
+
+    <div class="form-group">
+        <label>Author</label>
+        <input type="text" id="author">
+    </div>
+
+    <div class="form-group">
+        <label>Summary</label>
+        <textarea id="summary"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label>Findings</label>
+        <textarea id="findings"></textarea>
+    </div>
+
+    <button onclick="generateReport()">
+        Generate Report
+    </button>
+
+    <div class="report" id="report">
+
+        <h2 id="reportTitle"></h2>
+
+        <div class="report-section">
+            <strong>Author:</strong>
+            <span id="reportAuthor"></span>
+        </div>
+
+        <div class="report-section">
+            <strong>Summary:</strong>
+            <p id="reportSummary"></p>
+        </div>
+
+        <div class="report-section">
+            <strong>Findings:</strong>
+            <p id="reportFindings"></p>
+        </div>
+
+        <div class="report-section">
+            <strong>Date:</strong>
+            <span id="reportDate"></span>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+function generateReport(){
+
+    document.getElementById("reportTitle").innerText =
+        document.getElementById("title").value;
+
+    document.getElementById("reportAuthor").innerText =
+        document.getElementById("author").value;
+
+    document.getElementById("reportSummary").innerText =
+        document.getElementById("summary").value;
+
+    document.getElementById("reportFindings").innerText =
+        document.getElementById("findings").value;
+
+    document.getElementById("reportDate").innerText =
+        new Date().toLocaleDateString();
+
+    document.getElementById("report").style.display = "block";
+}
+</script>
+
+</body>
+</html>

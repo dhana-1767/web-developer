@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chatbox Integration</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f4f4;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.chat-container{
+    width:400px;
+    height:550px;
+    background:#fff;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 4px 15px rgba(0,0,0,0.15);
+    display:flex;
+    flex-direction:column;
+}
+
+.chat-header{
+    background:#007bff;
+    color:#fff;
+    padding:15px;
+    text-align:center;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.chat-body{
+    flex:1;
+    padding:15px;
+    overflow-y:auto;
+    background:#f9f9f9;
+}
+
+.message{
+    max-width:75%;
+    padding:10px 15px;
+    margin:10px 0;
+    border-radius:15px;
+    word-wrap:break-word;
+}
+
+.sent{
+    background:#007bff;
+    color:#fff;
+    margin-left:auto;
+}
+
+.received{
+    background:#e4e6eb;
+    color:#333;
+}
+
+.chat-footer{
+    display:flex;
+    padding:10px;
+    border-top:1px solid #ddd;
+}
+
+.chat-footer input{
+    flex:1;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:20px;
+    outline:none;
+}
+
+.chat-footer button{
+    margin-left:10px;
+    padding:10px 18px;
+    border:none;
+    background:#007bff;
+    color:white;
+    border-radius:20px;
+    cursor:pointer;
+}
+
+.chat-footer button:hover{
+    background:#0056b3;
+}
+</style>
+</head>
+<body>
+
+<div class="chat-container">
+    <div class="chat-header">
+        Live Chat Support
+    </div>
+
+    <div class="chat-body" id="chatBody">
+        <div class="message received">
+            Welcome! How can we help you today?
+        </div>
+    </div>
+
+    <div class="chat-footer">
+        <input type="text" id="messageInput"
+               placeholder="Type your message...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<script>
+function sendMessage() {
+    const input = document.getElementById("messageInput");
+    const message = input.value.trim();
+
+    if(message === "") return;
+
+    const chatBody = document.getElementById("chatBody");
+
+    const userMsg = document.createElement("div");
+    userMsg.classList.add("message","sent");
+    userMsg.textContent = message;
+    chatBody.appendChild(userMsg);
+
+    input.value = "";
+
+    chatBody.scrollTop = chatBody.scrollHeight;
+
+    setTimeout(() => {
+        const botMsg = document.createElement("div");
+        botMsg.classList.add("message","received");
+        botMsg.textContent =
+            "Thank you for your message. Our team will respond shortly.";
+        chatBody.appendChild(botMsg);
+
+        chatBody.scrollTop = chatBody.scrollHeight;
+    }, 1000);
+}
+
+document.getElementById("messageInput")
+.addEventListener("keypress", function(e){
+    if(e.key === "Enter"){
+        sendMessage();
+    }
+});
+</script>
+
+</body>
+</html>

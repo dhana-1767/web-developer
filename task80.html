@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Firebase Integration</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            padding:30px;
+            background:#f4f4f4;
+        }
+
+        .container{
+            max-width:500px;
+            margin:auto;
+            background:white;
+            padding:20px;
+            border-radius:10px;
+        }
+
+        input{
+            width:100%;
+            padding:10px;
+            margin:10px 0;
+        }
+
+        button{
+            padding:10px 20px;
+            cursor:pointer;
+        }
+
+        ul{
+            margin-top:20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Firebase Firestore Demo</h2>
+
+    <input type="text" id="name" placeholder="Enter Name">
+
+    <button onclick="saveData()">Save</button>
+
+    <ul id="userList"></ul>
+</div>
+
+<script type="module">
+
+import { initializeApp } from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    getDocs
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT.firebaseapp.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT.appspot.com",
+    messagingSenderId: "XXXXXXXX",
+    appId: "YOUR_APP_ID"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.saveData = async function() {
+
+    const name = document.getElementById("name").value;
+
+    if(name === "") return;
+
+    await addDoc(collection(db, "users"), {
+        name: name,
+        createdAt: new Date()
+    });
+
+    loadData();
+};
+
+async function loadData() {
+
+    const querySnapshot =
+        await getDocs(collection(db, "users"));
+
+    let html = "";
+
+    querySnapshot.forEach((doc) => {
+        html += `<li>${doc.data().name}</li>`;
+    });
+
+    document.getElementById("userList").innerHTML = html;
+}
+
+loadData();
+
+</script>
+
+</body>
+</html>

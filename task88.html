@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2563eb">
+
+<title>My Progressive Web App</title>
+
+<link rel="manifest" href="manifest.json">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+}
+
+header{
+    background:#2563eb;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    padding:20px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    margin:15px 0;
+    box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+
+button{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.status{
+    margin-top:15px;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Progressive Web App</h1>
+    <p>Installable & Offline Ready</p>
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h2>Welcome</h2>
+        <p>This is a simple Progressive Web App.</p>
+        <button onclick="showMessage()">Click Me</button>
+        <div class="status" id="status"></div>
+    </div>
+
+</div>
+
+<script>
+function showMessage(){
+    document.getElementById("status").innerHTML =
+    "PWA is working successfully!";
+}
+
+if("serviceWorker" in navigator){
+    window.addEventListener("load",()=>{
+        navigator.serviceWorker.register("service-worker.js")
+        .then(()=>{
+            console.log("Service Worker Registered");
+        })
+        .catch(err=>{
+            console.log("Registration Failed",err);
+        });
+    });
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitHub Actions CI/CD Workflow</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+    padding:40px;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+h1{
+    text-align:center;
+    color:#24292e;
+    margin-bottom:20px;
+}
+
+.workflow{
+    background:#0d1117;
+    color:#58a6ff;
+    padding:20px;
+    border-radius:8px;
+    overflow-x:auto;
+    margin-top:20px;
+}
+
+.feature-list{
+    margin-top:20px;
+}
+
+.feature-list li{
+    padding:8px;
+}
+
+.btn{
+    display:inline-block;
+    margin-top:20px;
+    padding:12px 25px;
+    background:#238636;
+    color:white;
+    text-decoration:none;
+    border-radius:5px;
+}
+
+.btn:hover{
+    background:#2ea043;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🚀 GitHub Actions CI/CD Workflow</h1>
+
+<p>
+This workflow automatically builds, tests, and deploys your application whenever code is pushed to GitHub.
+</p>
+
+<h2 style="margin-top:20px;">Workflow File</h2>
+
+<div class="workflow">
+<pre>
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: npm install
+      - run: npm test
+      - run: npm run build
+</pre>
+</div>
+
+<h2 style="margin-top:25px;">Features</h2>
+
+<ul class="feature-list">
+<li>✅ Automated Build</li>
+<li>✅ Automated Testing</li>
+<li>✅ Continuous Integration</li>
+<li>✅ Continuous Deployment</li>
+<li>✅ Artifact Management</li>
+<li>✅ Branch Protection Support</li>
+</ul>
+
+<a href="https://github.com/features/actions" class="btn" target="_blank">
+Learn GitHub Actions
+</a>
+
+</div>
+
+</body>
+</html>
