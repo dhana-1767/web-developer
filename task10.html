@@ -1,0 +1,506 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --surface: #ffffff;
+      --surface-alt: #eef2ff;
+      --primary: #2563eb;
+      --primary-strong: #1d4ed8;
+      --text: #111827;
+      --muted: #64748b;
+      --border: #dbe2ef;
+      --radius: 24px;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .panel {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      background: #111827;
+      color: white;
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .sidebar .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.4rem;
+      font-weight: 800;
+    }
+
+    .sidebar .brand-mark {
+      width: 2.3rem;
+      height: 2.3rem;
+      border-radius: 0.85rem;
+      background: var(--primary);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      color: white;
+    }
+
+    .nav-list {
+      display: grid;
+      gap: 0.65rem;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1rem;
+      color: #cbd5e1;
+      text-decoration: none;
+      border-radius: 18px;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .nav-item.active,
+    .nav-item:hover {
+      background: rgba(255,255,255,0.08);
+      color: white;
+    }
+
+    .sidebar-footer {
+      margin-top: auto;
+      padding: 1rem;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .sidebar-footer p {
+      margin: 0.45rem 0 0;
+      color: #bfc7d9;
+      line-height: 1.8;
+      font-size: 0.95rem;
+    }
+
+    .main {
+      padding: 2rem;
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .topbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .topbar-left {
+      display: grid;
+      gap: 0.35rem;
+    }
+
+    .topbar-left h1 {
+      margin: 0;
+      font-size: clamp(1.9rem, 2.5vw, 2.8rem);
+    }
+
+    .topbar-left p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.95rem 1.3rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .button.primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .button.secondary {
+      background: var(--surface);
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
+    .metric-card,
+    .overview-card,
+    .table-card,
+    .activity-card {
+      background: var(--surface);
+      border-radius: 28px;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.05);
+      padding: 1.75rem;
+    }
+
+    .metric-title {
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .metric-value {
+      margin: 0.75rem 0 0;
+      font-size: 2rem;
+      font-weight: 800;
+    }
+
+    .metric-change {
+      margin: 0.5rem 0 0;
+      color: var(--primary-strong);
+      font-weight: 700;
+    }
+
+    .overview-card {
+      display: grid;
+      gap: 1.25rem;
+    }
+
+    .overview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .overview-header h2 {
+      margin: 0;
+      font-size: 1.05rem;
+    }
+
+    .overview-status {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .overview-summary {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .summary-item {
+      background: var(--surface-alt);
+      border-radius: 20px;
+      padding: 1rem;
+    }
+
+    .summary-item h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1rem;
+    }
+
+    .summary-item p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .table-card {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 720px;
+    }
+
+    th,
+    td {
+      padding: 1rem 0.85rem;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+      font-size: 0.95rem;
+    }
+
+    th {
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    tr:hover {
+      background: #f8fafc;
+    }
+
+    .status-dot {
+      display: inline-flex;
+      width: 0.8rem;
+      height: 0.8rem;
+      border-radius: 999px;
+      margin-right: 0.5rem;
+    }
+
+    .status-active { background: #10b981; }
+    .status-warn { background: #f97316; }
+    .status-offline { background: #ef4444; }
+
+    .activity-list {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .activity-item {
+      display: grid;
+      gap: 0.35rem;
+      padding: 1rem;
+      border-radius: 22px;
+      background: var(--surface-alt);
+    }
+
+    .activity-item p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .activity-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 1040px) {
+      .panel {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        flex-direction: row;
+        padding: 1rem;
+        overflow-x: auto;
+      }
+
+      .nav-list {
+        display: flex;
+        gap: 0.75rem;
+      }
+
+      .sidebar-footer {
+        display: none;
+      }
+
+      .metrics-grid,
+      .overview-summary {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .topbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="panel">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">A</span>Admino</div>
+      <nav class="nav-list">
+        <a class="nav-item active" href="#">Dashboard</a>
+        <a class="nav-item" href="#">Users</a>
+        <a class="nav-item" href="#">Reports</a>
+        <a class="nav-item" href="#">Tasks</a>
+        <a class="nav-item" href="#">Settings</a>
+      </nav>
+      <div class="sidebar-footer">
+        <h4>Admin Support</h4>
+        <p>Have a question? Reach out to the admin team for help with your panel.</p>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="topbar-left">
+          <h1>Admin Panel</h1>
+          <p>Manage users, review activity, and monitor system performance from one place.</p>
+        </div>
+        <div class="actions">
+          <a class="button secondary" href="#">Generate report</a>
+          <a class="button primary" href="#">New user</a>
+        </div>
+      </header>
+
+      <section class="metrics-grid">
+        <div class="metric-card">
+          <p class="metric-title">Total Users</p>
+          <p class="metric-value">4,850</p>
+          <p class="metric-change">+12.4% this month</p>
+        </div>
+        <div class="metric-card">
+          <p class="metric-title">Tickets Open</p>
+          <p class="metric-value">28</p>
+          <p class="metric-change">-8.1% this week</p>
+        </div>
+        <div class="metric-card">
+          <p class="metric-title">Server uptime</p>
+          <p class="metric-value">99.97%</p>
+          <p class="metric-change">Stable</p>
+        </div>
+        <div class="metric-card">
+          <p class="metric-title">Revenue</p>
+          <p class="metric-value">$124.1K</p>
+          <p class="metric-change">+18.2% growth</p>
+        </div>
+      </section>
+
+      <section class="overview-card">
+        <div class="overview-header">
+          <div>
+            <h2>System overview</h2>
+            <p class="overview-status">Live metrics across performance and user activity</p>
+          </div>
+          <span class="metric-change">Updated 5 minutes ago</span>
+        </div>
+        <div class="overview-summary">
+          <div class="summary-item">
+            <h3>Active sessions</h3>
+            <p>1,280 currently online</p>
+          </div>
+          <div class="summary-item">
+            <h3>New registrations</h3>
+            <p>342 in the past week</p>
+          </div>
+          <div class="summary-item">
+            <h3>Pending approvals</h3>
+            <p>14 items waiting review</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="table-card">
+        <div class="overview-header">
+          <h2>Recent user activity</h2>
+          <span class="overview-status">Latest login and actions</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>User</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Status</th>
+              <th>Last active</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Emma Carter</td>
+              <td>emma@company.com</td>
+              <td>Admin</td>
+              <td><span class="status-dot status-active"></span> Online</td>
+              <td>2 min ago</td>
+            </tr>
+            <tr>
+              <td>Liam Jackson</td>
+              <td>liam@company.com</td>
+              <td>Editor</td>
+              <td><span class="status-dot status-warn"></span> Idle</td>
+              <td>12 min ago</td>
+            </tr>
+            <tr>
+              <td>Sophia Kim</td>
+              <td>sophia@company.com</td>
+              <td>Viewer</td>
+              <td><span class="status-dot status-offline"></span> Offline</td>
+              <td>1h ago</td>
+            </tr>
+            <tr>
+              <td>Noah Patel</td>
+              <td>noah@company.com</td>
+              <td>Support</td>
+              <td><span class="status-dot status-active"></span> Online</td>
+              <td>5 min ago</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="activity-card">
+        <div class="overview-header">
+          <h2>Recent admin actions</h2>
+          <span class="overview-status">Latest changes logged by administrators</span>
+        </div>
+        <div class="activity-list">
+          <div class="activity-item">
+            <div class="activity-meta">
+              <span>New user invited</span>
+              <span>10 min ago</span>
+            </div>
+            <p>Michael added a new editor account for the marketing team.</p>
+          </div>
+          <div class="activity-item">
+            <div class="activity-meta">
+              <span>Policy updated</span>
+              <span>35 min ago</span>
+            </div>
+            <p>Emma revised password expiration settings for all users.</p>
+          </div>
+          <div class="activity-item">
+            <div class="activity-meta">
+              <span>Backup completed</span>
+              <span>1 hr ago</span>
+            </div>
+            <p>Automated database backup finished successfully.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

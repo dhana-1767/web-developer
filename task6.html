@@ -1,0 +1,249 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup Form</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #dbeafe;
+      --radius: 24px;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(180deg, #eff6ff 0%, #ffffff 100%);
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      padding: 1.5rem;
+    }
+
+    .signup-card {
+      width: min(540px, 100%);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: 0 30px 80px rgba(15, 23, 42, 0.1);
+      overflow: hidden;
+    }
+
+    .signup-header {
+      padding: 2.5rem 2rem 1.5rem;
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      color: white;
+    }
+
+    .signup-header h1 {
+      margin: 0;
+      font-size: clamp(2rem, 3vw, 2.75rem);
+      line-height: 1.05;
+    }
+
+    .signup-header p {
+      margin: 1rem 0 0;
+      color: rgba(255, 255, 255, 0.88);
+      line-height: 1.75;
+    }
+
+    .signup-form {
+      padding: 2rem;
+      display: grid;
+      gap: 1.25rem;
+    }
+
+    .form-group {
+      display: grid;
+      gap: 0.5rem;
+    }
+
+    label {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    input {
+      width: 100%;
+      padding: 0.95rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      font-size: 1rem;
+      background: #f8fafc;
+      color: var(--text);
+    }
+
+    input:focus {
+      outline: 2px solid rgba(37, 99, 235, 0.24);
+      border-color: var(--primary);
+      background: white;
+    }
+
+    .form-row {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .checkbox-group input {
+      width: auto;
+      accent-color: var(--primary);
+    }
+
+    .submit-button {
+      width: 100%;
+      padding: 1rem 1.1rem;
+      border-radius: 999px;
+      border: none;
+      background: var(--primary);
+      color: white;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .submit-button:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      text-align: center;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .social-buttons {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .social-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      justify-content: center;
+      width: 100%;
+      padding: 0.95rem 1rem;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: white;
+      color: var(--text);
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .social-button:hover {
+      background: #eef2ff;
+      border-color: rgba(37, 99, 235, 0.24);
+    }
+
+    .social-icon {
+      width: 2rem;
+      height: 2rem;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #e0f2fe;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .footnote {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-top: 0.5rem;
+    }
+
+    .footnote a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    @media (max-width: 520px) {
+      .signup-header,
+      .signup-form {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="signup-card">
+    <div class="signup-header">
+      <h1>Create your account</h1>
+      <p>Start your free trial and access all features. Join now to unlock your team’s productivity.</p>
+    </div>
+    <form class="signup-form">
+      <div class="form-group">
+        <label for="fullname">Full name</label>
+        <input type="text" id="fullname" placeholder="Jane Doe" required />
+      </div>
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="email" id="email" placeholder="you@example.com" required />
+      </div>
+      <div class="form-group">
+        <label for="company">Company name</label>
+        <input type="text" id="company" placeholder="Your company" />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Create a password" required />
+      </div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="newsletter" />
+        <label for="newsletter">Send me product news and updates</label>
+      </div>
+      <button class="submit-button" type="submit">Sign up</button>
+      <div class="divider">or sign up with</div>
+      <div class="social-buttons">
+        <button class="social-button" type="button">
+          <span class="social-icon">G</span>
+          Continue with Google
+        </button>
+        <button class="social-button" type="button">
+          <span class="social-icon">A</span>
+          Continue with Apple
+        </button>
+      </div>
+      <p class="footnote">Already have an account? <a href="#">Log in</a></p>
+    </form>
+  </div>
+</body>
+</html>

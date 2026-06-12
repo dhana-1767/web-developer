@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PostgreSQL Product Dashboard</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:#f4f7fc;
+    padding:30px;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+}
+
+.header{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.header h1{
+    color:#336791;
+}
+
+.card{
+    background:#fff;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom:25px;
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+label{
+    display:block;
+    margin-bottom:5px;
+    font-weight:600;
+}
+
+input, textarea, select{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:6px;
+}
+
+.btn{
+    background:#336791;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.btn:hover{
+    background:#24516f;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    overflow:hidden;
+    border-radius:12px;
+}
+
+table th{
+    background:#336791;
+    color:white;
+}
+
+table th,
+table td{
+    padding:12px;
+    border:1px solid #ddd;
+    text-align:left;
+}
+
+.edit{
+    background:#28a745;
+    color:white;
+    border:none;
+    padding:8px 12px;
+    border-radius:4px;
+    cursor:pointer;
+}
+
+.delete{
+    background:#dc3545;
+    color:white;
+    border:none;
+    padding:8px 12px;
+    border-radius:4px;
+    cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>🐘 PostgreSQL Product Management</h1>
+        <p>Manage products stored in PostgreSQL database</p>
+    </div>
+
+    <div class="card">
+
+        <h2>Add Product</h2>
+
+        <form action="/products/create" method="POST">
+
+            <div class="form-group">
+                <label>Product Name</label>
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Enter product name"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label>Description</label>
+                <textarea
+                    name="description"
+                    rows="4"
+                    placeholder="Enter description"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Price</label>
+                <input
+                    type="number"
+                    step="0.01"
+                    name="price"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label>Stock Quantity</label>
+                <input
+                    type="number"
+                    name="stock_quantity"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label>Category</label>
+                <select name="category">
+                    <option>Electronics</option>
+                    <option>Accessories</option>
+                    <option>Books</option>
+                    <option>Clothing</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn">
+                Save Product
+            </button>
+
+        </form>
+
+    </div>
+
+    <div class="card">
+
+        <h2>Product List</h2>
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Category</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>1</td>
+                    <td>Laptop</td>
+                    <td>Gaming Laptop</td>
+                    <td>₹50,000</td>
+                    <td>10</td>
+                    <td>Electronics</td>
+                    <td>
+                        <button class="edit">Edit</button>
+                        <button class="delete">Delete</button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <td>Phone</td>
+                    <td>Android Smartphone</td>
+                    <td>₹25,000</td>
+                    <td>20</td>
+                    <td>Electronics</td>
+                    <td>
+                        <button class="edit">Edit</button>
+                        <button class="delete">Delete</button>
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>

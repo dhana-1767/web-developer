@@ -1,0 +1,489 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Layout</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface-alt: #eef2ff;
+      --primary: #2563eb;
+      --primary-soft: rgba(37, 99, 235, 0.12);
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #dbeafe;
+      --radius: 24px;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .dashboard {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      background: #0f172a;
+      color: white;
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.5rem;
+      font-weight: 800;
+    }
+
+    .brand-mark {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 0.85rem;
+      background: var(--primary);
+      display: grid;
+      place-items: center;
+      font-size: 1rem;
+      font-weight: 800;
+      color: white;
+    }
+
+    .nav-list {
+      display: grid;
+      gap: 0.5rem;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.95rem 1rem;
+      border-radius: 18px;
+      color: #cbd5e1;
+      text-decoration: none;
+      background: transparent;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .nav-item:hover,
+    .nav-item.active {
+      background: rgba(255, 255, 255, 0.08);
+      color: white;
+    }
+
+    .nav-item span {
+      font-weight: 600;
+    }
+
+    .sidebar-footer {
+      margin-top: auto;
+      padding: 1rem;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .sidebar-footer h4 {
+      margin: 0 0 0.6rem;
+      font-size: 0.95rem;
+      color: #cbd5e1;
+    }
+
+    .sidebar-footer p {
+      margin: 0;
+      color: #94a3b8;
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    .main {
+      padding: 2rem;
+    }
+
+    .topbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .page-title {
+      display: grid;
+      gap: 0.35rem;
+    }
+
+    .page-title h1 {
+      margin: 0;
+      font-size: clamp(1.8rem, 2.4vw, 2.5rem);
+    }
+
+    .page-title p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .top-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.95rem 1.2rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      background: var(--primary);
+      color: white;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .button.secondary {
+      background: var(--surface);
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border-radius: 28px;
+      padding: 1.75rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.06);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .card-header h2 {
+      margin: 0;
+      font-size: 1.05rem;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 800;
+      margin: 0.3rem 0 0;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .chart-card {
+      display: grid;
+      gap: 1.25rem;
+    }
+
+    .chart-placeholder {
+      height: 190px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(15, 23, 42, 0.04));
+      border: 1px dashed var(--border);
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .table-card {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 720px;
+    }
+
+    th,
+    td {
+      padding: 1rem 0.85rem;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+      font-size: 0.96rem;
+    }
+
+    th {
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    tr:hover {
+      background: #f8fafc;
+    }
+
+    .status-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(34, 197, 94, 0.12);
+      color: #15803d;
+      font-size: 0.85rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .aside-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 0.85rem;
+      border-radius: 999px;
+      background: #e2e8f0;
+      overflow: hidden;
+      margin-top: 0.75rem;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 72%;
+      background: var(--primary);
+      border-radius: 999px;
+    }
+
+    @media (max-width: 1080px) {
+      .dashboard {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        flex-direction: row;
+        overflow-x: auto;
+        min-height: auto;
+        padding: 1rem;
+      }
+
+      .nav-list {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 0.75rem;
+      }
+
+      .sidebar-footer {
+        display: none;
+      }
+
+      .main {
+        padding: 1.5rem;
+      }
+
+      .grid-3,
+      .aside-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .topbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">D</span>Dashly</div>
+      <nav class="nav-list">
+        <a class="nav-item active" href="#">Overview</a>
+        <a class="nav-item" href="#">Analytics</a>
+        <a class="nav-item" href="#">Projects</a>
+        <a class="nav-item" href="#">Billing</a>
+        <a class="nav-item" href="#">Settings</a>
+      </nav>
+      <div class="sidebar-footer">
+        <h4>Need support?</h4>
+        <p>Contact the team anytime for a personalized dashboard walkthrough.</p>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="page-title">
+          <h1>Dashboard</h1>
+          <p>Welcome back — here’s what’s happening with your business today.</p>
+        </div>
+        <div class="top-actions">
+          <a href="#" class="button secondary">Export report</a>
+          <a href="#" class="button">Create new project</a>
+        </div>
+      </header>
+
+      <section class="grid-3">
+        <article class="card">
+          <div class="card-header">
+            <div>
+              <h2>Total revenue</h2>
+              <p class="stat-label">Last 30 days</p>
+            </div>
+            <p class="stat-number">$78.4K</p>
+          </div>
+          <p class="stat-label">Revenue is up 14% compared to the previous period.</p>
+        </article>
+        <article class="card">
+          <div class="card-header">
+            <div>
+              <h2>Active users</h2>
+              <p class="stat-label">Across products</p>
+            </div>
+            <p class="stat-number">12.3K</p>
+          </div>
+          <p class="stat-label">A 9% increase in daily engagement.</p>
+        </article>
+        <article class="card">
+          <div class="card-header">
+            <div>
+              <h2>Conversion rate</h2>
+              <p class="stat-label">Current funnel</p>
+            </div>
+            <p class="stat-number">4.8%</p>
+          </div>
+          <p class="stat-label">Conversion remains above the industry average.</p>
+        </article>
+      </section>
+
+      <section class="card chart-card">
+        <div class="card-header">
+          <h2>Weekly performance</h2>
+          <span class="stat-label">Revenue, users, and churn</span>
+        </div>
+        <div class="chart-placeholder">Chart placeholder</div>
+      </section>
+
+      <section class="grid-3">
+        <article class="card">
+          <div class="card-header">
+            <div>
+              <h2>New signups</h2>
+              <p class="stat-label">This month</p>
+            </div>
+            <p class="stat-number">842</p>
+          </div>
+          <div class="progress-bar"><div class="progress-fill"></div></div>
+        </article>
+        <article class="card">
+          <div class="card-header">
+            <div>
+              <h2>Open tickets</h2>
+              <p class="stat-label">Customer support</p>
+            </div>
+            <p class="stat-number">24</p>
+          </div>
+          <p class="stat-label">Tickets are being handled within 2 hours.</p>
+        </article>
+        <article class="card">
+          <div class="card-header">
+            <div>
+              <h2>Task completion</h2>
+              <p class="stat-label">Team progress</p>
+            </div>
+            <p class="stat-number">92%</p>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" style="width: 92%;"></div></div>
+        </article>
+      </section>
+
+      <section class="card table-card">
+        <div class="card-header">
+          <h2>Recent activity</h2>
+          <span class="stat-label">Latest customer interactions</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Customer</th>
+              <th>Product</th>
+              <th>Status</th>
+              <th>Revenue</th>
+              <th>Deadline</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Acme Corp</td>
+              <td>Growth plan</td>
+              <td><span class="status-chip">Active</span></td>
+              <td>$14,200</td>
+              <td>May 12</td>
+            </tr>
+            <tr>
+              <td>Bright Labs</td>
+              <td>Onboarding</td>
+              <td><span class="status-chip">Pending</span></td>
+              <td>$9,100</td>
+              <td>May 18</td>
+            </tr>
+            <tr>
+              <td>River Studio</td>
+              <td>Analytics</td>
+              <td><span class="status-chip">Active</span></td>
+              <td>$7,800</td>
+              <td>May 21</td>
+            </tr>
+            <tr>
+              <td>Nova Health</td>
+              <td>Renewal</td>
+              <td><span class="status-chip">Completed</span></td>
+              <td>$18,500</td>
+              <td>May 26</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

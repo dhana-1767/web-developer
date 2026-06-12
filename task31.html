@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Upload System</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f4f4;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.container{
+    background:#fff;
+    padding:30px;
+    width:100%;
+    max-width:600px;
+    border-radius:12px;
+    box-shadow:0 4px 15px rgba(0,0,0,.1);
+    text-align:center;
+}
+
+h2{
+    margin-bottom:20px;
+}
+
+.upload-box{
+    border:2px dashed #2563eb;
+    padding:40px;
+    border-radius:10px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.upload-box:hover{
+    background:#f0f7ff;
+}
+
+input[type="file"]{
+    display:none;
+}
+
+.preview{
+    margin-top:20px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:15px;
+}
+
+.preview img{
+    width:100%;
+    height:150px;
+    object-fit:cover;
+    border-radius:8px;
+    box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <h2>Image Upload System</h2>
+
+    <label class="upload-box">
+        <input
+            type="file"
+            id="imageInput"
+            multiple
+            accept="image/*"
+        >
+        📷 Click to Upload Images
+    </label>
+
+    <div class="preview" id="preview"></div>
+
+</div>
+
+<script>
+
+const imageInput =
+document.getElementById("imageInput");
+
+const preview =
+document.getElementById("preview");
+
+imageInput.addEventListener("change", function(){
+
+    preview.innerHTML = "";
+
+    const files = this.files;
+
+    for(let file of files){
+
+        if(file.type.startsWith("image/")){
+
+            const reader = new FileReader();
+
+            reader.onload = function(e){
+
+                const img =
+                document.createElement("img");
+
+                img.src = e.target.result;
+
+                preview.appendChild(img);
+            };
+
+            reader.readAsDataURL(file);
+        }
+    }
+});
+
+</script>
+
+</body>
+</html>

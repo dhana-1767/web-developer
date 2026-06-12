@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notification System</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f4f4f4;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.container{
+    text-align:center;
+}
+
+button{
+    padding:12px 25px;
+    background:#007bff;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+button:hover{
+    background:#0056b3;
+}
+
+.notification-container{
+    position:fixed;
+    top:20px;
+    right:20px;
+    z-index:1000;
+}
+
+.notification{
+    background:#28a745;
+    color:white;
+    padding:15px 20px;
+    margin-bottom:10px;
+    border-radius:5px;
+    min-width:250px;
+    box-shadow:0 4px 8px rgba(0,0,0,0.2);
+    animation:slideIn 0.5s ease;
+}
+
+.notification.error{
+    background:#dc3545;
+}
+
+.notification.warning{
+    background:#ffc107;
+    color:#333;
+}
+
+@keyframes slideIn{
+    from{
+        transform:translateX(100%);
+        opacity:0;
+    }
+    to{
+        transform:translateX(0);
+        opacity:1;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <button onclick="showNotification('Success! Action completed.', 'success')">
+        Show Success Notification
+    </button>
+
+    <button onclick="showNotification('Error! Something went wrong.', 'error')">
+        Show Error Notification
+    </button>
+
+    <button onclick="showNotification('Warning! Check your input.', 'warning')">
+        Show Warning Notification
+    </button>
+</div>
+
+<div class="notification-container" id="notificationContainer"></div>
+
+<script>
+function showNotification(message, type) {
+    const container = document.getElementById("notificationContainer");
+
+    const notification = document.createElement("div");
+    notification.classList.add("notification");
+
+    if(type === "error"){
+        notification.classList.add("error");
+    }
+    else if(type === "warning"){
+        notification.classList.add("warning");
+    }
+
+    notification.textContent = message;
+    container.appendChild(notification);
+
+    setTimeout(() => {
+        notification.remove();
+    }, 3000);
+}
+</script>
+
+</body>
+</html>

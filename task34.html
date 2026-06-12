@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RBAC System</title>
+
+<style>
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f4f4;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.container{
+    width:400px;
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 4px 12px rgba(0,0,0,.1);
+}
+
+input,select,button{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+}
+
+button{
+    background:#2563eb;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+
+.hidden{
+    display:none;
+}
+
+.card{
+    background:#eef4ff;
+    padding:15px;
+    margin:10px 0;
+    border-radius:6px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Login -->
+
+    <div id="loginPage">
+
+        <h2>Login</h2>
+
+        <input
+            type="text"
+            id="username"
+            placeholder="Username">
+
+        <select id="role">
+
+            <option value="admin">
+                Admin
+            </option>
+
+            <option value="manager">
+                Manager
+            </option>
+
+            <option value="user">
+                User
+            </option>
+
+        </select>
+
+        <button onclick="login()">
+            Login
+        </button>
+
+    </div>
+
+    <!-- Dashboard -->
+
+    <div id="dashboard" class="hidden">
+
+        <h2>Dashboard</h2>
+
+        <p id="welcome"></p>
+
+        <div
+            id="adminPanel"
+            class="card hidden">
+
+            <h3>Admin Panel</h3>
+
+            <p>
+                Manage users, permissions,
+                system settings.
+            </p>
+        </div>
+
+        <div
+            id="managerPanel"
+            class="card hidden">
+
+            <h3>Manager Panel</h3>
+
+            <p>
+                Manage projects,
+                reports, and teams.
+            </p>
+        </div>
+
+        <div
+            id="userPanel"
+            class="card hidden">
+
+            <h3>User Panel</h3>
+
+            <p>
+                View profile and personal data.
+            </p>
+        </div>
+
+        <button onclick="logout()">
+            Logout
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+function login(){
+
+    const username =
+    document.getElementById(
+        "username"
+    ).value;
+
+    const role =
+    document.getElementById(
+        "role"
+    ).value;
+
+    if(!username){
+
+        alert(
+            "Enter Username"
+        );
+
+        return;
+    }
+
+    localStorage.setItem(
+        "username",
+        username
+    );
+
+    localStorage.setItem(
+        "role",
+        role
+    );
+
+    loadDashboard();
+}
+
+function loadDashboard(){
+
+    const username =
+    localStorage.getItem(
+        "username"
+    );
+
+    const role =
+    localStorage.getItem(
+        "role"
+    );
+
+    document
+    .getElementById(
+        "loginPage"
+    )
+    .classList.add("hidden");
+
+    document
+    .getElementById(
+        "dashboard"
+    )
+    .classList.remove("hidden");
+
+    document
+    .getElementById(
+        "welcome"
+    )
+    .innerHTML =
+    `Welcome <b>${username}</b>
+    (${role})`;
+
+    // Hide all panels
+
+    document
+    .getElementById(
+        "adminPanel"
+    )
+    .classList.add("hidden");
+
+    document
+    .getElementById(
+        "managerPanel"
+    )
+    .classList.add("hidden");
+
+    document
+    .getElementById(
+        "userPanel"
+    )
+    .classList.add("hidden");
+
+    // RBAC Rules
+
+    if(role === "admin"){
+
+        document
+        .getElementById(
+            "adminPanel"
+        )
+        .classList.remove("hidden");
+
+        document
+        .getElementById(
+            "managerPanel"
+        )
+        .classList.remove("hidden");
+
+        document
+        .getElementById(
+            "userPanel"
+        )
+        .classList.remove("hidden");
+    }
+
+    else if(
+        role === "manager"
+    ){
+
+        document
+        .getElementById(
+            "managerPanel"
+        )
+        .classList.remove("hidden");
+
+        document
+        .getElementById(
+            "userPanel"
+        )
+        .classList.remove("hidden");
+    }
+
+    else{
+
+        document
+        .getElementById(
+            "userPanel"
+        )
+        .classList.remove("hidden");
+    }
+}
+
+function logout(){
+
+    localStorage.clear();
+
+    location.reload();
+}
+
+window.onload = function(){
+
+    if(
+        localStorage.getItem(
+            "username"
+        )
+    ){
+
+        loadDashboard();
+    }
+};
+
+</script>
+
+</body>
+</html>

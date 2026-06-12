@@ -1,0 +1,299 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsive Image Slider</title>
+  <style>
+    :root {
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #111827;
+      background: #eff2ff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(180deg, #eef2ff 0%, #f8fafc 100%);
+      color: inherit;
+      display: grid;
+      place-items: center;
+      padding: 2rem;
+    }
+
+    .slider-shell {
+      width: min(980px, 100%);
+      max-width: 1000px;
+      background: #ffffff;
+      border-radius: 32px;
+      box-shadow: 0 24px 70px rgba(15, 23, 42, 0.12);
+      overflow: hidden;
+    }
+
+    .slider-header {
+      padding: 2rem 2rem 0;
+      text-align: center;
+    }
+
+    .slider-header h1 {
+      margin: 0;
+      font-size: clamp(2rem, 3vw, 2.7rem);
+      letter-spacing: -0.04em;
+    }
+
+    .slider-header p {
+      margin: 0.9rem auto 2rem;
+      max-width: 760px;
+      color: #475569;
+      line-height: 1.75;
+    }
+
+    .slider {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 0.6s ease;
+      will-change: transform;
+    }
+
+    .slide {
+      min-width: 100%;
+      position: relative;
+    }
+
+    .slide img {
+      width: 100%;
+      height: min(520px, 60vh);
+      object-fit: cover;
+      display: block;
+    }
+
+    .slide-caption {
+      position: absolute;
+      bottom: 1.75rem;
+      left: 1.75rem;
+      right: 1.75rem;
+      padding: 1.35rem 1.5rem;
+      border-radius: 24px;
+      background: rgba(15, 23, 42, 0.72);
+      color: #f8fafc;
+      backdrop-filter: blur(8px);
+    }
+
+    .slide-caption h2 {
+      margin: 0 0 0.45rem;
+      font-size: 1.35rem;
+    }
+
+    .slide-caption p {
+      margin: 0;
+      color: #dbeafe;
+      line-height: 1.65;
+    }
+
+    .slider-controls,
+    .slider-dots {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.25rem 1.5rem 2rem;
+    }
+
+    .slider-controls button {
+      width: 3rem;
+      height: 3rem;
+      border: none;
+      border-radius: 50%;
+      background: #e0e7ff;
+      color: #3730a3;
+      font-size: 1.35rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    }
+
+    .slider-controls button:hover {
+      transform: translateY(-2px);
+      background: #c7d2fe;
+    }
+
+    .slider-dots button {
+      width: 0.9rem;
+      height: 0.9rem;
+      border-radius: 999px;
+      border: none;
+      background: #cbd5e1;
+      cursor: pointer;
+      transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    .slider-dots button.active {
+      width: 1.2rem;
+      height: 1.2rem;
+      background: #4338ca;
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 720px) {
+      .slider-caption {
+        left: 1rem;
+        right: 1rem;
+        bottom: 1rem;
+        padding: 1rem 1.1rem;
+      }
+
+      .slider-controls,
+      .slider-dots {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      .slider-header {
+        padding: 1.5rem 1rem 0;
+      }
+
+      .slider-header p {
+        font-size: 0.98rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="slider-shell">
+    <div class="slider-header">
+      <h1>Responsive image slider</h1>
+      <p>Preview the responsive carousel with smooth transitions, captions, and touch-friendly controls for desktop and mobile layouts.</p>
+    </div>
+
+    <div class="slider" id="slider">
+      <div class="slides" id="slides">
+        <div class="slide">
+          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80" alt="Mountain sunrise" />
+          <div class="slide-caption">
+            <h2>Mountain sunrise retreat</h2>
+            <p>Wake up to crisp air and panoramic views while the sun paints the valley in gold.</p>
+          </div>
+        </div>
+        <div class="slide">
+          <img src="https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80" alt="Coastal road trip" />
+          <div class="slide-caption">
+            <h2>Coastal road adventure</h2>
+            <p>Drive along winding shorelines and discover hidden beaches along the open road.</p>
+          </div>
+        </div>
+        <div class="slide">
+          <img src="https://images.unsplash.com/photo-1517816743773-6e0fd518b4a6?auto=format&fit=crop&w=1200&q=80" alt="City skyline at dusk" />
+          <div class="slide-caption">
+            <h2>City skyline evenings</h2>
+            <p>Enjoy vibrant nightlife and illuminated cityscapes from rooftop lounges and terraces.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slider-controls">
+      <button id="prevBtn" aria-label="Previous slide">‹</button>
+      <button id="nextBtn" aria-label="Next slide">›</button>
+    </div>
+
+    <div class="slider-dots" id="dots"></div>
+  </div>
+
+  <script>
+    const slidesContainer = document.getElementById('slides');
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const dotsContainer = document.getElementById('dots');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    let currentIndex = 0;
+    let intervalId;
+
+    const createDots = () => {
+      slides.forEach((_, index) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.dataset.index = index;
+        if (index === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => {
+          goToSlide(index);
+          resetAutoSlide();
+        });
+        dotsContainer.appendChild(dot);
+      });
+    };
+
+    const updateSlider = () => {
+      slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+      document.querySelectorAll('.slider-dots button').forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentIndex);
+      });
+    };
+
+    const goToSlide = (index) => {
+      currentIndex = (index + slides.length) % slides.length;
+      updateSlider();
+    };
+
+    const nextSlide = () => goToSlide(currentIndex + 1);
+    const prevSlide = () => goToSlide(currentIndex - 1);
+
+    const resetAutoSlide = () => {
+      clearInterval(intervalId);
+      intervalId = setInterval(nextSlide, 5000);
+    };
+
+    prevBtn.addEventListener('click', () => {
+      prevSlide();
+      resetAutoSlide();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      nextSlide();
+      resetAutoSlide();
+    });
+
+    createDots();
+    resetAutoSlide();
+
+    let startX = 0;
+    let isDragging = false;
+
+    const pointerStart = (event) => {
+      isDragging = true;
+      startX = event.type.includes('mouse') ? event.clientX : event.touches[0].clientX;
+    };
+
+    const pointerMove = (event) => {
+      if (!isDragging) return;
+      const currentX = event.type.includes('mouse') ? event.clientX : event.touches[0].clientX;
+      const diff = startX - currentX;
+      if (Math.abs(diff) > 60) {
+        if (diff > 0) nextSlide(); else prevSlide();
+        isDragging = false;
+        resetAutoSlide();
+      }
+    };
+
+    const pointerEnd = () => {
+      isDragging = false;
+    };
+
+    const slider = document.getElementById('slider');
+    slider.addEventListener('touchstart', pointerStart, { passive: true });
+    slider.addEventListener('touchmove', pointerMove, { passive: true });
+    slider.addEventListener('touchend', pointerEnd);
+    slider.addEventListener('mousedown', pointerStart);
+    slider.addEventListener('mousemove', pointerMove);
+    slider.addEventListener('mouseup', pointerEnd);
+    slider.addEventListener('mouseleave', pointerEnd);
+  </script>
+</body>
+</html>

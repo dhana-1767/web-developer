@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session Management System</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.container{
+    width:400px;
+    background:#fff;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+h2{
+    text-align:center;
+    margin-bottom:20px;
+    color:#333;
+}
+
+.input-group{
+    margin-bottom:15px;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:6px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:6px;
+    color:white;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+.login-btn{
+    background:#007bff;
+}
+
+.profile-btn{
+    background:#28a745;
+}
+
+.logout-btn{
+    background:#dc3545;
+}
+
+.message{
+    margin-top:15px;
+    text-align:center;
+    font-weight:bold;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <h2>🔐 Session Authentication</h2>
+
+    <div class="input-group">
+        <input
+            type="email"
+            id="email"
+            placeholder="Email Address">
+    </div>
+
+    <div class="input-group">
+        <input
+            type="password"
+            id="password"
+            placeholder="Password">
+    </div>
+
+    <button
+        class="login-btn"
+        onclick="login()">
+        Login
+    </button>
+
+    <button
+        class="profile-btn"
+        onclick="getProfile()">
+        View Profile
+    </button>
+
+    <button
+        class="logout-btn"
+        onclick="logout()">
+        Logout
+    </button>
+
+    <div
+        class="message"
+        id="message">
+    </div>
+
+</div>
+
+<script>
+
+const API_URL =
+"http://localhost:5000";
+
+function showMessage(msg){
+    document.getElementById(
+        "message"
+    ).innerText = msg;
+}
+
+async function login(){
+
+    const email =
+    document.getElementById(
+        "email"
+    ).value;
+
+    const password =
+    document.getElementById(
+        "password"
+    ).value;
+
+    try{
+
+        const response =
+        await fetch(
+            `${API_URL}/login`,
+            {
+                method:"POST",
+
+                headers:{
+                    "Content-Type":
+                    "application/json"
+                },
+
+                credentials:"include",
+
+                body:JSON.stringify({
+                    email,
+                    password
+                })
+            }
+        );
+
+        const data =
+        await response.json();
+
+        showMessage(
+            data.message
+        );
+
+    }catch(error){
+
+        showMessage(
+            "Login Failed"
+        );
+    }
+}
+
+async function getProfile(){
+
+    try{
+
+        const response =
+        await fetch(
+            `${API_URL}/profile`,
+            {
+                credentials:
+                "include"
+            }
+        );
+
+        const data =
+        await response.json();
+
+        if(data.user){
+
+            showMessage(
+                "Welcome " +
+                data.user.email
+            );
+
+        }else{
+
+            showMessage(
+                data.message
+            );
+        }
+
+    }catch(error){
+
+        showMessage(
+            "Access Denied"
+        );
+    }
+}
+
+async function logout(){
+
+    try{
+
+        const response =
+        await fetch(
+            `${API_URL}/logout`,
+            {
+                method:"POST",
+
+                credentials:
+                "include"
+            }
+        );
+
+        const data =
+        await response.json();
+
+        showMessage(
+            data.message
+        );
+
+    }catch(error){
+
+        showMessage(
+            "Logout Failed"
+        );
+    }
+}
+
+</script>
+
+</body>
+</html>

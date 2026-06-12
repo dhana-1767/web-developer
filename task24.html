@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shopping Cart System</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f4f4;
+    padding:30px;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.container{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:30px;
+}
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.product{
+    background:#fff;
+    padding:20px;
+    border-radius:10px;
+    text-align:center;
+    box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+.product img{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+    border-radius:8px;
+}
+
+.product h3{
+    margin:15px 0;
+}
+
+.product p{
+    color:#2563eb;
+    font-weight:bold;
+}
+
+button{
+    background:#2563eb;
+    color:#fff;
+    border:none;
+    padding:10px 15px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.cart{
+    background:#fff;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+.cart-item{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:15px;
+    padding-bottom:10px;
+    border-bottom:1px solid #ddd;
+}
+
+.qty-btn{
+    padding:3px 8px;
+    margin:0 3px;
+}
+
+.remove{
+    background:red;
+}
+
+.total{
+    margin-top:20px;
+    font-size:20px;
+    font-weight:bold;
+}
+
+@media(max-width:768px){
+    .container{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+<body>
+
+<h1>Shopping Cart System</h1>
+
+<div class="container">
+
+    <div class="products">
+
+        <div class="product">
+            <img src="https://picsum.photos/300/200?1">
+            <h3>Wireless Headphones</h3>
+            <p>$99</p>
+            <button onclick="addToCart(1,'Wireless Headphones',99)">
+                Add to Cart
+            </button>
+        </div>
+
+        <div class="product">
+            <img src="https://picsum.photos/300/200?2">
+            <h3>Smart Watch</h3>
+            <p>$149</p>
+            <button onclick="addToCart(2,'Smart Watch',149)">
+                Add to Cart
+            </button>
+        </div>
+
+        <div class="product">
+            <img src="https://picsum.photos/300/200?3">
+            <h3>Bluetooth Speaker</h3>
+            <p>$79</p>
+            <button onclick="addToCart(3,'Bluetooth Speaker',79)">
+                Add to Cart
+            </button>
+        </div>
+
+    </div>
+
+    <div class="cart">
+        <h2>Cart</h2>
+
+        <div id="cart-items"></div>
+
+        <div class="total">
+            Total: $<span id="total">0</span>
+        </div>
+    </div>
+
+</div>
+
+<script>
+
+let cart=[];
+
+function addToCart(id,name,price){
+
+    let item=cart.find(product=>product.id===id);
+
+    if(item){
+        item.qty++;
+    }else{
+        cart.push({
+            id,
+            name,
+            price,
+            qty:1
+        });
+    }
+
+    renderCart();
+}
+
+function changeQty(id,value){
+
+    let item=cart.find(product=>product.id===id);
+
+    if(item){
+        item.qty+=value;
+
+        if(item.qty<=0){
+            cart=cart.filter(product=>product.id!==id);
+        }
+    }
+
+    renderCart();
+}
+
+function removeItem(id){
+    cart=cart.filter(product=>product.id!==id);
+    renderCart();
+}
+
+function renderCart(){
+
+    const cartItems=
+    document.getElementById("cart-items");
+
+    cartItems.innerHTML="";
+
+    let total=0;
+
+    cart.forEach(item=>{
+
+        total+=item.price*item.qty;
+
+        cartItems.innerHTML+=`
+        <div class="cart-item">
+
+            <div>
+                <strong>${item.name}</strong><br>
+                $${item.price} × ${item.qty}
+            </div>
+
+            <div>
+                <button class="qty-btn"
+                onclick="changeQty(${item.id},1)">+</button>
+
+                <button class="qty-btn"
+                onclick="changeQty(${item.id},-1)">-</button>
+
+                <button class="remove"
+                onclick="removeItem(${item.id})">
+                X
+                </button>
+            </div>
+
+        </div>
+        `;
+    });
+
+    document.getElementById("total")
+    .textContent=total.toFixed(2);
+}
+
+</script>
+
+</body>
+</html>

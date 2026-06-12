@@ -1,0 +1,344 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Forms</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f7fb;
+      color: #1f2937;
+      accent-color: #4f46e5;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(circle at top, rgba(99, 102, 241, 0.14), transparent 28%),
+                  linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+      color: inherit;
+    }
+
+    .page {
+      width: min(1100px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: 2rem 0 4rem;
+    }
+
+    header {
+      display: grid;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -0.03em;
+    }
+
+    header p {
+      margin: 0;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+      color: #475569;
+      line-height: 1.75;
+    }
+
+    .forms-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
+    .panel {
+      background: rgba(255,255,255,0.95);
+      border: 1px solid rgba(148,163,184,0.22);
+      border-radius: 28px;
+      padding: 2rem;
+      box-shadow: 0 24px 50px rgba(15, 23, 42, 0.08);
+      backdrop-filter: blur(12px);
+    }
+
+    .panel h2 {
+      margin-top: 0;
+      font-size: 1.35rem;
+    }
+
+    .panel p {
+      margin: 0.75rem 0 1.5rem;
+      color: #64748b;
+      line-height: 1.7;
+    }
+
+    .form-group {
+      display: grid;
+      gap: 0.65rem;
+      margin-bottom: 1.25rem;
+    }
+
+    label {
+      font-weight: 600;
+      color: #334155;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 1rem 1.1rem;
+      border: 1px solid rgba(148,163,184,0.35);
+      border-radius: 16px;
+      background: #ffffff;
+      color: #0f172a;
+      font-size: 1rem;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: rgba(79, 70, 229, 0.65);
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+      outline: none;
+    }
+
+    textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .input-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1.5rem;
+    }
+
+    .actions button,
+    .actions a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 3rem;
+      padding: 0 1.35rem;
+      border-radius: 999px;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    }
+
+    .actions button {
+      background: #4f46e5;
+      color: #ffffff;
+      box-shadow: 0 12px 24px rgba(79, 70, 229, 0.18);
+    }
+
+    .actions button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 30px rgba(79, 70, 229, 0.22);
+    }
+
+    .actions a {
+      color: #4f46e5;
+      background: transparent;
+    }
+
+    .split-fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .info-box {
+      margin-top: 1.5rem;
+      padding: 1.4rem 1.5rem;
+      border-radius: 22px;
+      border: 1px solid rgba(148,163,184,0.22);
+      background: #f8fafc;
+    }
+
+    .info-box h3 {
+      margin: 0 0 0.65rem;
+      font-size: 1rem;
+    }
+
+    .info-box p {
+      margin: 0;
+      color: #475569;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 980px) {
+      .forms-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .input-row,
+      .split-fields {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        padding: 1.2rem 0 2.5rem;
+      }
+
+      .panel {
+        padding: 1.5rem;
+      }
+
+      .actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <h1>Responsive form layouts</h1>
+      <p>Clean, mobile-first forms for signup, contact, and profile updates with responsive grids and accessible form controls.</p>
+    </header>
+
+    <div class="forms-grid">
+      <section class="panel">
+        <h2>Create account</h2>
+        <p>Complete the registration form to start using the dashboard and unlock premium features.</p>
+        <form>
+          <div class="input-row">
+            <div class="form-group">
+              <label for="firstName">First name</label>
+              <input id="firstName" name="firstName" type="text" placeholder="Alex" />
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last name</label>
+              <input id="lastName" name="lastName" type="text" placeholder="Taylor" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" />
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" placeholder="••••••••" />
+          </div>
+
+          <div class="form-group">
+            <label for="plan">Choose a plan</label>
+            <select id="plan" name="plan">
+              <option>Basic</option>
+              <option>Standard</option>
+              <option>Premium</option>
+            </select>
+          </div>
+
+          <div class="actions">
+            <button type="submit">Create account</button>
+            <a href="#">Already have an account?</a>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel">
+        <h2>Contact support</h2>
+        <p>Send a quick message to support or ask about product details, billing, and onboarding help.</p>
+        <form>
+          <div class="form-group">
+            <label for="contactName">Name</label>
+            <input id="contactName" name="contactName" type="text" placeholder="Jamie Parker" />
+          </div>
+
+          <div class="form-group">
+            <label for="contactEmail">Email</label>
+            <input id="contactEmail" name="contactEmail" type="email" placeholder="hello@example.com" />
+          </div>
+
+          <div class="form-group">
+            <label for="category">Inquiry type</label>
+            <select id="category" name="category">
+              <option>General question</option>
+              <option>Billing</option>
+              <option>Technical issue</option>
+              <option>Feedback</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell us how we can help..."></textarea>
+          </div>
+
+          <div class="actions">
+            <button type="submit">Send message</button>
+            <a href="#">View help center</a>
+          </div>
+        </form>
+      </section>
+    </div>
+
+    <section class="panel" style="margin-top: 1.5rem;">
+      <h2>Update profile</h2>
+      <p>Manage account details with an adaptable profile form designed for desktop and mobile screens.</p>
+      <div class="split-fields">
+        <div class="form-group">
+          <label for="company">Company</label>
+          <input id="company" name="company" type="text" placeholder="Cloudline Inc." />
+        </div>
+        <div class="form-group">
+          <label for="jobTitle">Job title</label>
+          <input id="jobTitle" name="jobTitle" type="text" placeholder="Product designer" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="website">Website</label>
+        <input id="website" name="website" type="url" placeholder="https://example.com" />
+      </div>
+
+      <div class="form-group">
+        <label for="timezone">Timezone</label>
+        <select id="timezone" name="timezone">
+          <option>UTC-08:00 Pacific Time</option>
+          <option>UTC-05:00 Eastern Time</option>
+          <option>UTC+00:00 London</option>
+          <option>UTC+05:30 India Standard Time</option>
+        </select>
+      </div>
+
+      <div class="actions">
+        <button type="button">Save changes</button>
+        <a href="#">Cancel</a>
+      </div>
+
+      <div class="info-box">
+        <h3>Responsive form layout</h3>
+        <p>Fields stack automatically on smaller screens while keeping a spacious card layout and keyboard-friendly touch targets.</p>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

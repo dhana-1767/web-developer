@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flask Product Dashboard</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f4f4;
+    padding:30px;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.form-box{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    margin-bottom:20px;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:1px solid #ccc;
+    border-radius:6px;
+}
+
+button{
+    padding:12px 20px;
+    border:none;
+    background:#007bff;
+    color:white;
+    cursor:pointer;
+    border-radius:6px;
+}
+
+button:hover{
+    background:#0056b3;
+}
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+.price{
+    color:green;
+    font-weight:bold;
+    margin:10px 0;
+}
+
+.delete-btn{
+    background:red;
+}
+
+.delete-btn:hover{
+    background:darkred;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Product Management System</h1>
+
+    <div class="form-box">
+        <input type="text" id="name" placeholder="Product Name">
+        <input type="number" id="price" placeholder="Product Price">
+        <button onclick="addProduct()">Add Product</button>
+    </div>
+
+    <div class="products" id="productList"></div>
+
+</div>
+
+<script>
+
+const API_URL = "http://127.0.0.1:5000/api/products";
+
+async function fetchProducts(){
+    const response = await fetch(API_URL);
+    const products = await response.json();
+
+    let output = "";
+
+    products.forEach(product => {
+        output += `
+            <div class="card">
+                <h3>${product.name}</h3>
+                <p class="price">₹${product.price}</p>
+                <button class="delete-btn"
+                    onclick="deleteProduct(${product.id})">
+                    Delete
+                </button>
+            </div>
+        `;
+    });
+
+    document.getElementById("productList").innerHTML = output;
+}
+
+async function addProduct(){
+
+    const name = document.getElementById("name").value;
+    const price = document.getElementById("price").value;
+
+    if(!name || !price){
+        alert("Please fill all fields");
+        return;
+    }
+
+    await fetch(API_URL,{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+            name:name,
+            price:price
+        })
+    });
+
+    document.getElementById("name").value="";
+    document.getElementById("price").value="";
+
+    fetchProducts();
+}
+
+async function deleteProduct(id){
+
+    await fetch(`${API_URL}/${id}`,{
+        method:"DELETE"
+    });
+
+    fetchProducts();
+}
+
+fetchProducts();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Authentication System</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.container{
+    background:#fff;
+    width:350px;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 4px 12px rgba(0,0,0,.1);
+}
+
+h2{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin-bottom:15px;
+    border:1px solid #ccc;
+    border-radius:6px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+
+.link{
+    text-align:center;
+    margin-top:15px;
+}
+
+.link a{
+    color:#2563eb;
+    cursor:pointer;
+}
+
+.hidden{
+    display:none;
+}
+
+.dashboard{
+    text-align:center;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Register Form -->
+    <div id="registerForm">
+
+        <h2>Register</h2>
+
+        <input
+            type="text"
+            id="regName"
+            placeholder="Full Name"
+        >
+
+        <input
+            type="email"
+            id="regEmail"
+            placeholder="Email"
+        >
+
+        <input
+            type="password"
+            id="regPassword"
+            placeholder="Password"
+        >
+
+        <button onclick="registerUser()">
+            Register
+        </button>
+
+        <div class="link">
+            Already have an account?
+            <a onclick="showLogin()">Login</a>
+        </div>
+
+    </div>
+
+    <!-- Login Form -->
+    <div id="loginForm" class="hidden">
+
+        <h2>Login</h2>
+
+        <input
+            type="email"
+            id="loginEmail"
+            placeholder="Email"
+        >
+
+        <input
+            type="password"
+            id="loginPassword"
+            placeholder="Password"
+        >
+
+        <button onclick="loginUser()">
+            Login
+        </button>
+
+        <div class="link">
+            Don't have an account?
+            <a onclick="showRegister()">Register</a>
+        </div>
+
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="hidden dashboard">
+
+        <h2>Welcome</h2>
+
+        <p id="userName"></p>
+
+        <br>
+
+        <button onclick="logout()">
+            Logout
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+function showLogin(){
+
+    document
+    .getElementById("registerForm")
+    .classList.add("hidden");
+
+    document
+    .getElementById("loginForm")
+    .classList.remove("hidden");
+}
+
+function showRegister(){
+
+    document
+    .getElementById("loginForm")
+    .classList.add("hidden");
+
+    document
+    .getElementById("registerForm")
+    .classList.remove("hidden");
+}
+
+function registerUser(){
+
+    const name =
+    document.getElementById("regName").value;
+
+    const email =
+    document.getElementById("regEmail").value;
+
+    const password =
+    document.getElementById("regPassword").value;
+
+    if(!name || !email || !password){
+
+        alert("Please fill all fields");
+        return;
+    }
+
+    const user = {
+        name,
+        email,
+        password
+    };
+
+    localStorage.setItem(
+        "user",
+        JSON.stringify(user)
+    );
+
+    alert("Registration Successful");
+
+    showLogin();
+}
+
+function loginUser(){
+
+    const email =
+    document.getElementById("loginEmail").value;
+
+    const password =
+    document.getElementById("loginPassword").value;
+
+    const storedUser =
+    JSON.parse(
+        localStorage.getItem("user")
+    );
+
+    if(
+        storedUser &&
+        storedUser.email === email &&
+        storedUser.password === password
+    ){
+
+        localStorage.setItem(
+            "loggedIn",
+            "true"
+        );
+
+        loadDashboard();
+
+    }else{
+
+        alert("Invalid Credentials");
+    }
+}
+
+function loadDashboard(){
+
+    const user =
+    JSON.parse(
+        localStorage.getItem("user")
+    );
+
+    document
+    .getElementById("loginForm")
+    .classList.add("hidden");
+
+    document
+    .getElementById("registerForm")
+    .classList.add("hidden");
+
+    document
+    .getElementById("dashboard")
+    .classList.remove("hidden");
+
+    document
+    .getElementById("userName")
+    .textContent =
+    user.name;
+}
+
+function logout(){
+
+    localStorage.removeItem(
+        "loggedIn"
+    );
+
+    location.reload();
+}
+
+window.onload = function(){
+
+    if(
+        localStorage.getItem(
+            "loggedIn"
+        ) === "true"
+    ){
+
+        loadDashboard();
+    }
+};
+
+</script>
+
+</body>
+</html>

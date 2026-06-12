@@ -1,0 +1,255 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pricing Table</title>
+  <style>
+    :root {
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #eff2ff;
+      color: #0f172a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+      color: inherit;
+    }
+
+    .page {
+      width: min(1100px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: 3rem 0 4rem;
+    }
+
+    .intro {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .intro h1 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -0.04em;
+    }
+
+    .intro p {
+      margin: 1rem auto 0;
+      color: #475569;
+      line-height: 1.75;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
+    .plan {
+      background: #ffffff;
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      border-radius: 32px;
+      padding: 2rem;
+      box-shadow: 0 26px 60px rgba(15, 23, 42, 0.08);
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .plan:hover {
+      transform: translateY(-4px);
+      border-color: rgba(99, 102, 241, 0.35);
+    }
+
+    .plan.featured {
+      background: linear-gradient(180deg, #4338ca 0%, #6366f1 100%);
+      color: #ffffff;
+      border: none;
+      box-shadow: 0 32px 90px rgba(67, 56, 202, 0.24);
+    }
+
+    .label {
+      display: inline-flex;
+      padding: 0.5rem 0.95rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    .label.popular {
+      background: rgba(255,255,255,0.18);
+      color: #eef2ff;
+    }
+
+    .plan h2 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    .plan h3 {
+      margin: 0.75rem 0 1.75rem;
+      font-size: 2.75rem;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    .plan h3 span {
+      display: block;
+      font-size: 1rem;
+      color: inherit;
+      opacity: 0.8;
+      font-weight: 500;
+      margin-top: 0.35rem;
+    }
+
+    .features {
+      display: grid;
+      gap: 1rem;
+      flex-grow: 1;
+      margin-bottom: 1.75rem;
+    }
+
+    .feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+      color: inherit;
+    }
+
+    .feature::before {
+      content: '✓';
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 1.5rem;
+      min-height: 1.5rem;
+      border-radius: 999px;
+      background: rgba(34, 197, 94, 0.16);
+      color: #16a34a;
+      font-size: 0.9rem;
+      margin-top: 0.15rem;
+    }
+
+    .plan.featured .feature::before {
+      background: rgba(255,255,255,0.18);
+      color: #dbeafe;
+    }
+
+    .feature span {
+      font-size: 0.95rem;
+      color: inherit;
+      opacity: 0.95;
+      line-height: 1.7;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 3.3rem;
+      padding: 0 1.15rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .plan:not(.featured) .cta {
+      background: #4338ca;
+      color: #ffffff;
+    }
+
+    .plan:not(.featured) .cta:hover {
+      transform: translateY(-2px);
+    }
+
+    .plan.featured .cta {
+      background: #ffffff;
+      color: #4338ca;
+    }
+
+    .plan.featured .cta:hover {
+      background: #e0e7ff;
+    }
+
+    @media (max-width: 980px) {
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        padding: 2rem 0 3rem;
+      }
+
+      .plan {
+        padding: 1.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="intro">
+      <h1>Simple pricing for every team</h1>
+      <p>Choose the plan that fits your company and scale with predictable billing and premium support.</p>
+    </section>
+
+    <div class="pricing-grid">
+      <article class="plan">
+        <div class="label">Starter</div>
+        <h2>Basic</h2>
+        <h3>$15<span>/mo</span></h3>
+        <div class="features">
+          <div class="feature"><span>Up to 5 users</span></div>
+          <div class="feature"><span>Core project templates</span></div>
+          <div class="feature"><span>Email support</span></div>
+          <div class="feature"><span>Community access</span></div>
+        </div>
+        <a class="cta" href="#">Choose Basic</a>
+      </article>
+
+      <article class="plan featured">
+        <div class="label popular">Most popular</div>
+        <h2>Growth</h2>
+        <h3>$39<span>/mo</span></h3>
+        <div class="features">
+          <div class="feature"><span>Up to 20 users</span></div>
+          <div class="feature"><span>Advanced analytics</span></div>
+          <div class="feature"><span>Priority support</span></div>
+          <div class="feature"><span>Team collaboration tools</span></div>
+          <div class="feature"><span>Custom onboarding</span></div>
+        </div>
+        <a class="cta" href="#">Choose Growth</a>
+      </article>
+
+      <article class="plan">
+        <div class="label">Scale</div>
+        <h2>Enterprise</h2>
+        <h3>$79<span>/mo</span></h3>
+        <div class="features">
+          <div class="feature"><span>Unlimited users</span></div>
+          <div class="feature"><span>Dedicated account manager</span></div>
+          <div class="feature"><span>Custom integrations</span></div>
+          <div class="feature"><span>Advanced security</span></div>
+        </div>
+        <a class="cta" href="#">Choose Enterprise</a>
+      </article>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>File Management System</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI,sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+    padding:30px;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,.1);
+}
+
+h1{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.toolbar{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+}
+
+.toolbar input[type="text"]{
+    flex:1;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:6px;
+}
+
+.toolbar input[type="file"]{
+    padding:8px;
+}
+
+button{
+    padding:12px 18px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    color:white;
+}
+
+.upload-btn{
+    background:#2563eb;
+}
+
+.delete-btn{
+    background:#dc2626;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    padding:12px;
+    border-bottom:1px solid #ddd;
+    text-align:left;
+}
+
+th{
+    background:#2563eb;
+    color:white;
+}
+
+.file-link{
+    color:#2563eb;
+    text-decoration:none;
+}
+
+@media(max-width:768px){
+    .toolbar{
+        flex-direction:column;
+    }
+
+    table{
+        display:block;
+        overflow-x:auto;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>File Management System</h1>
+
+    <div class="toolbar">
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search files..."
+        >
+
+        <input
+            type="file"
+            id="fileInput"
+            multiple
+        >
+
+        <button
+            class="upload-btn"
+            onclick="uploadFiles()">
+            Upload
+        </button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>File Name</th>
+                <th>Type</th>
+                <th>Size (KB)</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody id="fileTable"></tbody>
+    </table>
+
+</div>
+
+<script>
+
+let filesData = [];
+
+function uploadFiles(){
+
+    const input =
+    document.getElementById("fileInput");
+
+    const files = input.files;
+
+    for(let file of files){
+
+        filesData.push({
+            id: Date.now() + Math.random(),
+            name: file.name,
+            type: file.type || "Unknown",
+            size: (file.size/1024).toFixed(2),
+            url: URL.createObjectURL(file)
+        });
+    }
+
+    renderFiles();
+
+    input.value = "";
+}
+
+function renderFiles(){
+
+    const table =
+    document.getElementById("fileTable");
+
+    const search =
+    document.getElementById("searchInput")
+    .value
+    .toLowerCase();
+
+    table.innerHTML = "";
+
+    filesData
+    .filter(file =>
+        file.name
+        .toLowerCase()
+        .includes(search)
+    )
+    .forEach(file => {
+
+        table.innerHTML += `
+        <tr>
+
+            <td>
+                <a
+                href="${file.url}"
+                target="_blank"
+                class="file-link">
+                ${file.name}
+                </a>
+            </td>
+
+            <td>${file.type}</td>
+
+            <td>${file.size}</td>
+
+            <td>
+                <button
+                class="delete-btn"
+                onclick="deleteFile('${file.id}')">
+                Delete
+                </button>
+            </td>
+
+        </tr>
+        `;
+    });
+}
+
+function deleteFile(id){
+
+    filesData =
+    filesData.filter(
+        file => file.id != id
+    );
+
+    renderFiles();
+}
+
+document
+.getElementById("searchInput")
+.addEventListener("input", renderFiles);
+
+</script>
+
+</body>
+</html>

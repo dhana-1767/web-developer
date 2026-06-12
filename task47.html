@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Error Handling Dashboard</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+    padding:30px;
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:25px;
+    color:#333;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom:20px;
+}
+
+button{
+    padding:12px 20px;
+    border:none;
+    border-radius:6px;
+    color:white;
+    cursor:pointer;
+    margin-right:10px;
+}
+
+.success-btn{
+    background:#28a745;
+}
+
+.error-btn{
+    background:#dc3545;
+}
+
+.warning-btn{
+    background:#f39c12;
+}
+
+.notification{
+    padding:15px;
+    border-radius:6px;
+    margin-top:15px;
+    display:none;
+}
+
+.success{
+    background:#d4edda;
+    color:#155724;
+}
+
+.error{
+    background:#f8d7da;
+    color:#721c24;
+}
+
+.warning{
+    background:#fff3cd;
+    color:#856404;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+}
+
+th{
+    background:#343a40;
+    color:white;
+}
+
+th,td{
+    padding:12px;
+    border:1px solid #ddd;
+    text-align:left;
+}
+
+textarea{
+    width:100%;
+    height:150px;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    resize:none;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>🚨 Error Handling Dashboard</h1>
+
+    <div class="card">
+
+        <h2>Notification Test</h2>
+
+        <button
+            class="success-btn"
+            onclick="showSuccess()">
+            Success
+        </button>
+
+        <button
+            class="error-btn"
+            onclick="showError()">
+            Error
+        </button>
+
+        <button
+            class="warning-btn"
+            onclick="showWarning()">
+            Warning
+        </button>
+
+        <div
+            id="notification"
+            class="notification">
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <h2>Error Log Viewer</h2>
+
+        <textarea
+            id="logs"
+            readonly>
+[2026-06-10 10:00:00] INFO: Server Started
+[2026-06-10 10:05:20] ERROR: Database Connection Failed
+[2026-06-10 10:10:15] WARNING: Invalid User Input
+        </textarea>
+
+    </div>
+
+    <div class="card">
+
+        <h2>Error Codes</h2>
+
+        <table>
+
+            <tr>
+                <th>Status Code</th>
+                <th>Description</th>
+            </tr>
+
+            <tr>
+                <td>200</td>
+                <td>Success</td>
+            </tr>
+
+            <tr>
+                <td>400</td>
+                <td>Bad Request</td>
+            </tr>
+
+            <tr>
+                <td>401</td>
+                <td>Unauthorized</td>
+            </tr>
+
+            <tr>
+                <td>404</td>
+                <td>Not Found</td>
+            </tr>
+
+            <tr>
+                <td>500</td>
+                <td>Internal Server Error</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+</div>
+
+<script>
+
+function showNotification(message,type){
+
+    const notification =
+    document.getElementById(
+        "notification"
+    );
+
+    notification.className =
+    "notification " + type;
+
+    notification.innerHTML =
+    message;
+
+    notification.style.display =
+    "block";
+
+    setTimeout(() => {
+
+        notification.style.display =
+        "none";
+
+    },3000);
+}
+
+function showSuccess(){
+
+    showNotification(
+        "✅ Operation completed successfully",
+        "success"
+    );
+}
+
+function showError(){
+
+    showNotification(
+        "❌ Internal Server Error",
+        "error"
+    );
+}
+
+function showWarning(){
+
+    showNotification(
+        "⚠ Warning: Invalid input detected",
+        "warning"
+    );
+}
+
+window.onerror = function(
+    message,
+    source,
+    lineno,
+    colno
+){
+
+    const logs =
+    document.getElementById(
+        "logs"
+    );
+
+    logs.value +=
+    "\n[CLIENT ERROR] " +
+    message +
+    " Line:" +
+    lineno;
+
+};
+
+</script>
+
+</body>
+</html>
